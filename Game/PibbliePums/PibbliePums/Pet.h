@@ -15,7 +15,11 @@ namespace GEX {
 			Right,
 			Center
 		};
-		Pet(const TextureManager& textures);
+		enum class Facing {
+			Left,
+			Right
+		};
+		Pet(const TextureManager& textures, bool flippable);
 		virtual void				drawcurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 		unsigned int				getCategory() const override;
 		sf::FloatRect				getBoundingBox()const override;
@@ -28,7 +32,9 @@ namespace GEX {
 	private:
 		sf::Sprite						_sprite;
 		Position						_position;
+		Facing							_facing;
 		sf::Time						_movementTimer;
+		bool							_isFlippable;
 	};
 }
 

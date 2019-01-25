@@ -190,7 +190,7 @@ namespace GEX {
 		//playerEntity->setPosition(_spawnPosition);
 		//_player = playerEntity.get();
 		//_sceneLayers[UpperField]->attachChild(std::move(playerEntity));
-		std::unique_ptr<Pet> petEntity(new Pet(_textures));
+		std::unique_ptr<Pet> petEntity(new Pet(_textures,true));
 		petEntity->setPosition(_spawnPosition);
 		_pet = petEntity.get();
 		_sceneLayers[UpperField]->attachChild(std::move(petEntity));

@@ -6,6 +6,7 @@
 #include "Application.h"
 #include "State.h"
 #include "FontManager.h"
+#include <windows.h>
 
 const sf::Time Application::TimePerFrame = sf::seconds(1.0f / 60.0f);
 
@@ -36,6 +37,7 @@ Application::Application()
 
 void Application::run()
 {
+	
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 

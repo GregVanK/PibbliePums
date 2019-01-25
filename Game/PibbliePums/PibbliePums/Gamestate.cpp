@@ -11,7 +11,7 @@
 		_world(*context.window,*context.sound),
 		player(*context.player)
 	{
-		context.music->play(GEX::MusicID::MissionTheme);
+		//context.music->play(GEX::MusicID::MissionTheme);
 	}
 	void Gamestate::draw()
 	{
