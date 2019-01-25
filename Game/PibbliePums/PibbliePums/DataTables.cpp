@@ -212,7 +212,21 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::EggBaby].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("egg_happy"));
 	data[PetName::EggBaby].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
 	data[PetName::EggBaby].animations[Pet::State::Happy].setRepeating(true);
-	//data[ObstacleType::Car1].textureRect = sf::IntRect(85, 337, 40, 40);
+
+
+	frames = JsonFrameParser("Media/Textures/pets/melon-chan/melon-chan.json");
+	data[PetName::MelonChan].texture = TextureID::MelonChan;
+	data[PetName::MelonChan].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("melon_idle"));
+	data[PetName::MelonChan].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
+	data[PetName::MelonChan].animations[Pet::State::Idle].setRepeating(true);
+
+	data[PetName::MelonChan].animations[Pet::State::Walking].addFrameSet(frames.getFramesFor("melon_walking"));
+	data[PetName::MelonChan].animations[Pet::State::Walking].setDuration(sf::seconds(1.5));
+	data[PetName::MelonChan].animations[Pet::State::Walking].setRepeating(true);
+
+	data[PetName::MelonChan].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("melon_happy"));
+	data[PetName::MelonChan].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
+	data[PetName::MelonChan].animations[Pet::State::Happy].setRepeating(true);
 	return data;
 }
 

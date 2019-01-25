@@ -17,9 +17,14 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_movementTimer(sf::Time::Zero),
 	_isFlippable(flippable),
 	_facing(Facing::Left),
-	_state(State::Idle)
+	_state(State::Idle),
+	_agedUp(false),
+	_petType(type),
+	_textureManager(&textures)
 
 {
+	_birthday = std::chrono::system_clock::now();
+	_evoTime = _birthday + std::chrono::seconds(30);
 	//intalize aniamtions
 	for (auto a : TABLE.at(type).animations)
 	{
@@ -60,6 +65,22 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 	auto rec = _animations.at(_state).update(dt);
 	_sprite.setTextureRect(rec);
 	centerOrigin(_sprite);
+	//update evolution;
+	if (_agedUp == false && std::chrono::system_clock::now() > _evoTime) {
+		_petType = PetName::MelonChan;
+		_sprite.setTexture(_textureManager->get(TABLE.at(_petType).texture));
+		for (auto a : TABLE.at(_petType).animations)
+		{
+			_animations[a.first] = a.second;
+		}
+		_animations[_state].restart();
+		_agedUp = true;
+		std::cout << "TADA!";
+		auto rec = _animations.at(_state).update(dt);
+		_sprite.setTextureRect(rec);
+		centerOrigin(_sprite);
+	}
+		
 }
 
 void GEX::Pet::remove()

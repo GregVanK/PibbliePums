@@ -156,6 +156,7 @@ namespace GEX {
 	{
 		_textures.load(GEX::TextureID::Landscape, "Media/Textures/room.png");
 		_textures.load(GEX::TextureID::EggBaby, "Media/Textures/pets/eggie/baby_egg.png");
+		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
 
 		
 	}
@@ -190,7 +191,7 @@ namespace GEX {
 		//playerEntity->setPosition(_spawnPosition);
 		//_player = playerEntity.get();
 		//_sceneLayers[UpperField]->attachChild(std::move(playerEntity));
-		std::unique_ptr<Pet> petEntity(new Pet(PetName::EggBaby,_textures,true));
+		std::unique_ptr<Pet> petEntity(new Pet(PetName::EggBaby , _textures, true));
 		petEntity->setPosition(_spawnPosition);
 		_pet = petEntity.get();
 		_sceneLayers[UpperField]->attachChild(std::move(petEntity));

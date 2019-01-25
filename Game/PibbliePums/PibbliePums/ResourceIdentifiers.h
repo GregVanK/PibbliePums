@@ -9,6 +9,7 @@ namespace GEX {
 		Landscape,
 		Pet,
 		EggBaby,
+		MelonChan,
 		Jungle,
 		Entities,
 		LilyPad,

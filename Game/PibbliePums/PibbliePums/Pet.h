@@ -6,9 +6,12 @@
 #include <functional>
 #include <random>
 #include <time.h>
+#include <chrono>
+#include <ctime> 
 namespace GEX {
 	enum class PetName {
-		EggBaby
+		EggBaby,
+		MelonChan
 	};
 	class Pet : public Entity
 	{
@@ -45,10 +48,16 @@ namespace GEX {
 		sf::Sprite						_sprite;
 		Position						_position;
 		Facing							_facing;
+		PetName							_petType;
 		sf::Time						_movementTimer;
 		bool							_isFlippable;
 		std::map<State, Animation2>		_animations;
 		State							_state;
+		std::chrono::system_clock::time_point	_birthday;
+		std::chrono::system_clock::time_point	_evoTime;
+		const TextureManager*					_textureManager;
+
+		bool							_agedUp;
 	};
 }
 
