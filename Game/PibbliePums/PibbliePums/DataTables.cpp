@@ -196,6 +196,26 @@ GEX::FrogData GEX::intitalizeFrogData()
 	return frogData;
 }
 
+std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
+{
+	std::map<GEX::PetName, GEX::PetData> data;
+	JsonFrameParser frames = JsonFrameParser("Media/Textures/pets/eggie/baby_egg.json");
+	data[PetName::EggBaby].texture = TextureID::EggBaby;
+	data[PetName::EggBaby].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("egg_idle"));
+	data[PetName::EggBaby].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
+	data[PetName::EggBaby].animations[Pet::State::Idle].setRepeating(true);
+
+	data[PetName::EggBaby].animations[Pet::State::Walking].addFrameSet(frames.getFramesFor("egg_walking"));
+	data[PetName::EggBaby].animations[Pet::State::Walking].setDuration(sf::seconds(1.5));
+	data[PetName::EggBaby].animations[Pet::State::Walking].setRepeating(true);
+
+	data[PetName::EggBaby].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("egg_happy"));
+	data[PetName::EggBaby].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
+	data[PetName::EggBaby].animations[Pet::State::Happy].setRepeating(true);
+	//data[ObstacleType::Car1].textureRect = sf::IntRect(85, 337, 40, 40);
+	return data;
+}
+
 //std::map<GEX::AircraftType, GEX::AircraftData> GEX::initalizeAircraftData()
 //{
 //

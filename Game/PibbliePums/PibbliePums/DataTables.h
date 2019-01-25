@@ -11,6 +11,7 @@
 #include "Animation2.h"
 #include <map>
 #include "Obstacle.h"
+#include "Pet.h"
 
 namespace GEX {
 	struct Direction {
@@ -39,6 +40,15 @@ namespace GEX {
 		float									speed;
 	};
 
+	struct PetData {
+		TextureID								texture;
+		sf::IntRect								textureRect;
+		std::map<Pet::State, Animation2>	animations;
+		std::vector<Direction>					directions;
+		float									speed;
+		bool									isFlippable;
+	};
+
 	struct PickupData {
 		std::function<void(Frog&)>		action;
 		TextureID						texture;
@@ -55,6 +65,7 @@ namespace GEX {
 	std::map<Particle::Type, ParticleData>	initalizeParticleData();
 	//std::map<AircraftType, AircraftData> initalizeAircraftData();
 	FrogData								intitalizeFrogData();
+	std::map<PetName, PetData>				initalizePetData();
 	
 
 }

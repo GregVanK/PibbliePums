@@ -8,6 +8,7 @@ namespace GEX {
 	enum class TextureID { 
 		Landscape,
 		Pet,
+		EggBaby,
 		Jungle,
 		Entities,
 		LilyPad,

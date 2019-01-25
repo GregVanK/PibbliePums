@@ -1,19 +1,35 @@
 #include "Pet.h"
 #include <iostream>
 #include "Utility.h"
+#include "DataTables.h"
+#include <map>
+using namespace std::placeholders;
+namespace GEX {
+	namespace {
+		const std::map<PetName,PetData> TABLE = initalizePetData();
+	}
+}
 
-GEX::Pet::Pet(const TextureManager & textures, bool flippable = true) :
+GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = true) :
 	Entity(),
-	_sprite(textures.get(TextureID::Pet), sf::IntRect(0, 0, 32, 32)),
+	_sprite(textures.get(TABLE.at(type).texture), sf::IntRect(1, 1, 1, 1)),
 	_position(Position::Center),
 	_movementTimer(sf::Time::Zero),
 	_isFlippable(flippable),
-	_facing(Facing::Left)
+	_facing(Facing::Left),
+	_state(State::Idle)
 
 {
+	//intalize aniamtions
+	for (auto a : TABLE.at(type).animations)
+	{
+		_animations[a.first] = a.second;
+	}
+	
 	centerOrigin(_sprite);
 	_sprite.scale(4, 4);
 	srand(time(NULL));
+	_animations[_state].restart();
 }
 
 
@@ -39,6 +55,11 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 	centerOrigin(_sprite);
 	updateMovement(dt);
 	Entity::updateCurrent(dt, commands);
+
+	//update animations
+	auto rec = _animations.at(_state).update(dt);
+	_sprite.setTextureRect(rec);
+	centerOrigin(_sprite);
 }
 
 void GEX::Pet::remove()
@@ -47,12 +68,13 @@ void GEX::Pet::remove()
 
 void GEX::Pet::updateMovement(sf::Time dt)
 {
-	if (_movementTimer >= sf::seconds(5)) {
+	if (_movementTimer >= sf::seconds(3)) {
 		if (_position == Position::Left) {
 			if (rand() % 2 == 0) {
 				Entity::setVelocity(20, 0);
 				_position = Position::Center;
 				_movementTimer = sf::Time::Zero;
+				_state = State::Walking;
 				if (_isFlippable) {
 					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
 					_facing = Facing::Right;
@@ -61,6 +83,10 @@ void GEX::Pet::updateMovement(sf::Time dt)
 			}
 			else {
 				Entity::setVelocity(0, 0);
+				if (rand() % 2 == 0)
+					_state = State::Idle;
+				else
+					_state = State::Happy;
 				_position = Position::Left;
 				_movementTimer = sf::Time::Zero;
 			}
@@ -71,6 +97,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 				Entity::setVelocity(-20, 0);
 				_position = Position::Center;
 				_movementTimer = sf::Time::Zero;
+				_state = State::Walking;
 				if (_isFlippable) {
 					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
 					_facing = Facing::Left;
@@ -79,6 +106,10 @@ void GEX::Pet::updateMovement(sf::Time dt)
 			}
 			else {
 				Entity::setVelocity(0, 0);
+				if (rand() % 2 == 0)
+					_state = State::Idle;
+				else
+					_state = State::Happy;
 				_position = Position::Right;
 				_movementTimer = sf::Time::Zero;
 			}
@@ -88,6 +119,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 			if (randPos == 1) {
 				Entity::setVelocity(-20, 0);
 				_position = Position::Left;
+				_state = State::Walking;
 				if (_isFlippable && _facing == Facing::Right) {
 					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
 					_facing = Facing::Left;
@@ -98,6 +130,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 			else if (randPos == 2) {
 				Entity::setVelocity(20, 0);
 				_position = Position::Right;
+				_state = State::Walking;
 				if (_isFlippable && _facing == Facing::Left) {
 					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
 					_facing = Facing::Right;
@@ -108,6 +141,10 @@ void GEX::Pet::updateMovement(sf::Time dt)
 				Entity::setVelocity(0, 0);
 				_position = Position::Center;
 				_movementTimer = sf::Time::Zero;
+				if (rand() % 2 == 0)
+					_state = State::Idle;
+				else
+					_state = State::Happy;
 			}
 		}
 	}
@@ -123,4 +160,9 @@ void GEX::Pet::updateMovement(sf::Time dt)
 	}*/
 
 	_movementTimer += dt;
+}
+
+void GEX::Pet::updateAnimations()
+{
+	
 }

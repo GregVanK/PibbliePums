@@ -7,9 +7,13 @@
 #include <random>
 #include <time.h>
 namespace GEX {
+	enum class PetName {
+		EggBaby
+	};
 	class Pet : public Entity
 	{
 	public:
+		
 		enum class Position {
 			Left,
 			Right,
@@ -19,7 +23,14 @@ namespace GEX {
 			Left,
 			Right
 		};
-		Pet(const TextureManager& textures, bool flippable);
+		enum class State {
+			Idle,
+			Walking,
+			Upset,
+			Happy,
+			Sick
+		};
+		Pet(PetName type, const TextureManager& textures, bool flippable);
 		virtual void				drawcurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 		unsigned int				getCategory() const override;
 		sf::FloatRect				getBoundingBox()const override;
@@ -29,12 +40,15 @@ namespace GEX {
 	private:
 		void						remove() override;
 		void						updateMovement(sf::Time dt);
+		void						updateAnimations();
 	private:
 		sf::Sprite						_sprite;
 		Position						_position;
 		Facing							_facing;
 		sf::Time						_movementTimer;
 		bool							_isFlippable;
+		std::map<State, Animation2>		_animations;
+		State							_state;
 	};
 }
 
