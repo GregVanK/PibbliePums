@@ -30,6 +30,7 @@ namespace GEX {
 		void					popState();
 		void					clearStates();
 		bool					isEmpty() const;
+		void					forceInitalizeStack();
 	private:
 		State::Ptr				createState(GEX::StateID stateID);
 		void					applyPendingChanges();

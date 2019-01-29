@@ -51,6 +51,11 @@ bool GEX::StateStack::isEmpty() const
 	return _stack.empty();
 }
 
+void GEX::StateStack::forceInitalizeStack()
+{
+	applyPendingChanges();
+}
+
 GEX::State::Ptr GEX::StateStack::createState(GEX::StateID stateID)
 {
 	auto found = _factories.find(stateID);

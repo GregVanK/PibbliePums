@@ -7,6 +7,7 @@
 #include "State.h"
 #include "FontManager.h"
 #include <windows.h>
+#include <iostream>
 
 const sf::Time Application::TimePerFrame = sf::seconds(1.0f / 60.0f);
 
@@ -18,12 +19,13 @@ Application::Application()
 	_stateStack(GEX::State::Context(_window,_textures,_font,_player,_music,_sound)), 
 	_statNumFrames(0)
 {
+	
 	_window.setKeyRepeatEnabled(false);
 	GEX::FontManager::getInstance().load(GEX::FontID::Main,"Media/apple_kid.ttf");
+
 	_textures.load(GEX::TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
 	_textures.load(GEX::TextureID::GexScreen, "Media/Textures/face.png");
-
-
+	
 	///StatDisplay
 
 	/*_statText.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
@@ -33,17 +35,46 @@ Application::Application()
 
 	registerStates();
 	_stateStack.pushState(GEX::StateID::Game);
+
+	//fixes race condition crash
+	_stateStack.forceInitalizeStack();
+	
 }
+
+//void Application::run()
+//{
+//	
+//	sf::Clock clock;
+//	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+//
+//	while (_window.isOpen())
+//	{
+//		processInput();
+//		timeSinceLastUpdate = clock.restart();
+//		if (timeSinceLastUpdate > TimePerFrame)
+//		{	
+//			update(TimePerFrame);
+//		}
+//		else {
+//			update(TimePerFrame);
+//		}
+//		
+//		timeSinceLastUpdate -= TimePerFrame;
+//		render();
+//	}
+//}
+
+//Old run
 
 void Application::run()
 {
-	
+
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
 	while (_window.isOpen())
 	{
-		
+
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
