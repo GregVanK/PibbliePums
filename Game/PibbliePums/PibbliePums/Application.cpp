@@ -115,7 +115,8 @@ void Application::render()
 
 void Application::registerStates()
 {
-	_stateStack.registerState<TitleState>(GEX::StateID::Title),	_stateStack.registerState<MenuState>(GEX::StateID::Menu);
+	_stateStack.registerState<TitleState>(GEX::StateID::Title),
+	_stateStack.registerState<MenuState>(GEX::StateID::Menu);
 	_stateStack.registerState<Gamestate>(GEX::StateID::Game);
 	_stateStack.registerState<PauseState>(GEX::StateID::Pause);
 	_stateStack.registerState<GexState>(GEX::StateID::Gex);
