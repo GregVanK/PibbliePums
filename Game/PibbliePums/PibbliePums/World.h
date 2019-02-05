@@ -20,6 +20,7 @@
 #include "FontManager.h"
 #include <stdlib.h>
 #include <time.h>
+#include "Icon.h"
 
 
 
@@ -42,6 +43,8 @@ namespace GEX {
 		bool							hasAlivePlayer() const;
 		bool							hasPlayerReachedEnd() const;
 		void							destroyEntitesOutOfView();
+		void							iconNavLeft();
+		void							iconNavRight();
 
 		enum Layer {
 			Background = 0,
@@ -62,6 +65,7 @@ namespace GEX {
 		void							loadTextures();
 		void							buildScene();
 		void							handleCollisions();
+		void							initalizeIcons();
 	private:
 		sf::RenderTarget&				_target;
 		sf::RenderTexture				_sceneTexture;
@@ -77,6 +81,8 @@ namespace GEX {
 		sf::FloatRect					_worldBounds;
 		Pet*							_pet;
 		sf::Vector2f					_spawnPosition;
+		std::vector<Icon *>				_icons;
+		int								_selectedIcon;
 
 	};
 

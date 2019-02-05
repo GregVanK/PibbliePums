@@ -44,5 +44,15 @@
 			requestStackClear();
 			requestStackPush(GEX::StateID::Menu);
 		}
+
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Left)
+		{
+			_world.iconNavLeft();
+		}
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Right)
+		{
+			_world.iconNavRight();
+		}
+
 		return true;
 	}

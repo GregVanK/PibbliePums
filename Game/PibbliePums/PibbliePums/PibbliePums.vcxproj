@@ -41,6 +41,7 @@
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="Gamestate.cpp" />
     <ClCompile Include="GexState.cpp" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="JsonFrameParser.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="Gamestate.h" />
     <ClInclude Include="GexState.h" />
+    <ClInclude Include="Icon.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="JsonFrameParser.h" />
     <ClInclude Include="MenuState.h" />

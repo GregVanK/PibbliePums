@@ -5,46 +5,48 @@
 */
 #include "PlayerControl.h"
 #include "Frog.h"
+#include "World.h"
 #include "Command.h"
 #include "CommandQueue.h"
 #include "Category.h"
 namespace GEX {
 	struct FrogMover {
-	public:
-		FrogMover(float x, float y) : positionOffset(x,y){}
+	//public:
+	//	FrogMover(float x, float y) : positionOffset(x,y){}
 
-		//updates player position based on key presses
-		void operator() (Frog& frog, sf::Time) const {
-			//dont update movement when dead
-			if (!frog.isDead()){
-				if (positionOffset.y < 0 && positionOffset.x == 0) {
-					frog.addMovementTotal(1);
-						frog.setDirection(Frog::State::Up);
-				}
-				else if (positionOffset.y > 0 && positionOffset.x == 0) {
-					frog.addMovementTotal(-1);
-						frog.setDirection(Frog::State::Down);
-				}
-				else if (positionOffset.x < 0 && positionOffset.y == 0) {
-					frog.setDirection(Frog::State::Left);
-				}
-				else if (positionOffset.x > 0 && positionOffset.y == 0) {
-					;
-					frog.setDirection(Frog::State::Right);
-				}
-			frog.updateLocaton(positionOffset);
-		}
-		}
+	//	//updates player position based on key presses
+	//	void operator() (Frog& frog, sf::Time) const {
+	//		//dont update movement when dead
+	//		if (!frog.isDead()){
+	//			if (positionOffset.y < 0 && positionOffset.x == 0) {
+	//				frog.addMovementTotal(1);
+	//					frog.scenterOriginetDirection(Frog::State::Up);
+	//			}
+	//			else if (positionOffset.y > 0 && positionOffset.x == 0) {
+	//				frog.addMovementTotal(-1);
+	//					frog.setDirection(Frog::State::Down);
+	//			}
+	//			else if (positionOffset.x < 0 && positionOffset.y == 0) {
+	//				frog.setDirection(Frog::State::Left);
+	//			}
+	//			else if (positionOffset.x > 0 && positionOffset.y == 0) {
+	//				;
+	//				frog.setDirection(Frog::State::Right);
+	//			}
+	//		frog.updateLocaton(positionOffset);
+	//	}
+	//	}
 		sf::Vector2f positionOffset;
 	};
+
 	PlayerControl::PlayerControl()
 		:_currentMissionStatus(MissionStatus::MissionRunning)
 	{
 		//set up bindings
-		_keyBindings[sf::Keyboard::Left] = Action::MoveLeft;
-		_keyBindings[sf::Keyboard::Up] = Action::MoveUp;
-		_keyBindings[sf::Keyboard::Down] = Action::MoveDown;
-		_keyBindings[sf::Keyboard::Right] = Action::MoveRight;
+		//_keyBindings[sf::Keyboard::Left] = Action::MoveLeft;
+		//_keyBindings[sf::Keyboard::Up] = Action::MoveUp;
+		//_keyBindings[sf::Keyboard::Down] = Action::MoveDown;
+		//_keyBindings[sf::Keyboard::Right] = Action::MoveRight;
 		
 		//connect actions to bindings
 		initalizeActions();
@@ -94,12 +96,12 @@ namespace GEX {
 	}
 	void PlayerControl::initalizeActions() {
 		
-		const float PLAYER_MOVEMENT_H = 40;
-		const float PLAYER_MOVEMENT_V = 40;
-		_actionBindings[Action::MoveLeft].action = derivedAction<Frog>(FrogMover(-PLAYER_MOVEMENT_H,0.f));
-		_actionBindings[Action::MoveRight].action = derivedAction<Frog>(FrogMover(PLAYER_MOVEMENT_H,0.f));
-		_actionBindings[Action::MoveUp].action = derivedAction<Frog>(FrogMover(0.f,-PLAYER_MOVEMENT_V));
-		_actionBindings[Action::MoveDown].action = derivedAction<Frog>(FrogMover(0.f, PLAYER_MOVEMENT_V));
+		//const float PLAYER_MOVEMENT_H = 40;
+		//const float PLAYER_MOVEMENT_V = 40;
+		//_actionBindings[Action::MoveLeft].action = derivedAction<Frog>(FrogMover(-PLAYER_MOVEMENT_H,0.f));
+		//_actionBindings[Action::MoveRight].action = derivedAction<Frog>(FrogMover(PLAYER_MOVEMENT_H,0.f));
+		//_actionBindings[Action::MoveUp].action = derivedAction<Frog>(FrogMover(0.f,-PLAYER_MOVEMENT_V));
+		//_actionBindings[Action::MoveDown].action = derivedAction<Frog>(FrogMover(0.f, PLAYER_MOVEMENT_V));
 	 }
 }
 

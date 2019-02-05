@@ -81,8 +81,8 @@ bool GexState::handleEvents(const sf::Event & event)
 		requestStackPop();
 	if (event.key.code == sf::Keyboard::BackSpace)//Return to menu
 	{
-		requestStackClear();
-		requestStackPush(GEX::StateID::Menu);
+		//requestStackClear();
+		//requestStackPush(GEX::StateID::Menu);
 	}
 	return false;
 }

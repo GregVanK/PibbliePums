@@ -10,6 +10,7 @@ namespace GEX {
 		Pet,
 		EggBaby,
 		MelonChan,
+
 		Jungle,
 		Entities,
 		LilyPad,
@@ -17,7 +18,10 @@ namespace GEX {
 		TitleScreen, 
 		GexScreen,
 		Explosion,Particle,
-		FinishLine
+		FinishLine,
+		FoodInvIcon,
+		GameIcon,
+		ShopIcon
 	};
 	enum class FontID {
 		Main

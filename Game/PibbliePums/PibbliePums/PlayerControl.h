@@ -14,10 +14,9 @@ namespace GEX {
 	class CommandQueue;
 	enum  class Action
 	{
-		MoveLeft,
 		MoveRight,
-		MoveUp,
-		MoveDown,
+		MoveLeft,
+		Select
 	};
 	enum class MissionStatus {
 		MissionRunning,

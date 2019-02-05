@@ -28,7 +28,8 @@ namespace GEX {
 		_sceneGraph(),
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldview.getSize().x, _worldview.getSize().y),
-		_spawnPosition(_worldview.getSize().x / 2.f, (_worldview.getSize().y / 4.f)*3.f)
+		_spawnPosition(_worldview.getSize().x / 2.f, (_worldview.getSize().y / 4.f)*3.f),
+		_selectedIcon(0)
 	{
 
 		_sceneTexture.create(_target.getSize().x, _target.getSize().y);
@@ -38,7 +39,7 @@ namespace GEX {
 		
 		//prep the view
 		_worldview.setCenter(_worldview.getSize().x / 2.f, _worldBounds.height - _worldview.getSize().y / 2.f);
-
+		initalizeIcons();
 
 	}
 
@@ -149,6 +150,33 @@ namespace GEX {
 		//_command.push(command);
 	}
 
+	void World::iconNavLeft()
+	{
+		_icons[_selectedIcon]->toggleActive();
+		if (_selectedIcon == 0) {
+			_selectedIcon = _icons.size() - 1;
+		}
+		else
+		{
+			_selectedIcon--;
+		}
+		_icons[_selectedIcon]->toggleActive();
+	}
+
+	void World::iconNavRight()
+	{
+		_icons[_selectedIcon]->toggleActive();
+		if (_selectedIcon ==  _icons.size() - 1) {
+			_selectedIcon = 0;
+		}
+		else
+		{
+			_selectedIcon++;
+		}
+		_icons[_selectedIcon]->toggleActive();
+		
+	}
+
 
 
 	//loads textures
@@ -157,6 +185,10 @@ namespace GEX {
 		_textures.load(GEX::TextureID::Landscape, "Media/Textures/room.png");
 		_textures.load(GEX::TextureID::EggBaby, "Media/Textures/pets/eggie/baby_egg.png");
 		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
+		_textures.load(GEX::TextureID::FoodInvIcon, "Media/Textures/icons/fruit.png");
+		_textures.load(GEX::TextureID::GameIcon, "Media/Textures/icons/games.png");
+		_textures.load(GEX::TextureID::ShopIcon, "Media/Textures/icons/dollar_sign.png");
+
 
 		
 	}
@@ -261,6 +293,26 @@ namespace GEX {
 		//		bonus.destroy();
 		//	}
 		//}
+	}
+
+	void World::initalizeIcons()
+	{
+		const float TOP_ROW = 40;
+		std::unique_ptr<Icon> foodIcon(new Icon(_textures, Icon::IconID::FoodInv, true));
+		std::unique_ptr<Icon> gameIcon(new Icon(_textures, Icon::IconID::Games, false));
+		std::unique_ptr<Icon> shopIcon(new Icon(_textures, Icon::IconID::Shop, false));
+		_icons.push_back(foodIcon.get());
+		_icons.push_back(gameIcon.get());
+		_icons.push_back(shopIcon.get());
+		_sceneLayers[UpperField]->attachChild(std::move(foodIcon));
+		_sceneLayers[UpperField]->attachChild(std::move(gameIcon));
+		_sceneLayers[UpperField]->attachChild(std::move(shopIcon));
+		for (int i = 0; i < _icons.size(); i++) {
+			//gets a relative position based on amount of icons loaded
+			float xPos = (((i) * (getViewBounds().width / (_icons.size()))) + 50);
+			_icons[i]->setPosition(sf::Vector2f(xPos, TOP_ROW));
+
+		}
 	}
 
 
