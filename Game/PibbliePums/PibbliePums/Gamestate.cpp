@@ -40,6 +40,9 @@
 			requestStackPush(GEX::StateID::Pause);
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::G)
 			requestStackPush(GEX::StateID::Gex);
+
+
+
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Delete) { //set to delete rather than Q since Q is my rotate key
 			requestStackClear();
 			requestStackPush(GEX::StateID::Menu);
