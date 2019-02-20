@@ -177,6 +177,11 @@ namespace GEX {
 		
 	}
 
+	StateID World::getCurrentIconState()
+	{
+		return _icons[_selectedIcon]->getState();
+	}
+
 
 
 	//loads textures

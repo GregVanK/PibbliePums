@@ -25,6 +25,7 @@ Application::Application()
 
 	_textures.load(GEX::TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
 	_textures.load(GEX::TextureID::GexScreen, "Media/Textures/face.png");
+	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
 	
 	///StatDisplay
 
@@ -121,4 +122,5 @@ void Application::registerStates()
 	_stateStack.registerState<PauseState>(GEX::StateID::Pause);
 	_stateStack.registerState<GexState>(GEX::StateID::Gex);
 	_stateStack.registerState<GameOverState>(GEX::StateID::GameOver);
+	_stateStack.registerState<InventoryState>(GEX::StateID::Inventory);
 }

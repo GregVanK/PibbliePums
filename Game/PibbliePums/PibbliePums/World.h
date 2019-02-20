@@ -45,6 +45,7 @@ namespace GEX {
 		void							destroyEntitesOutOfView();
 		void							iconNavLeft();
 		void							iconNavRight();
+		StateID							getCurrentIconState();
 
 		enum Layer {
 			Background = 0,

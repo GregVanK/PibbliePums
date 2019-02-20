@@ -56,6 +56,14 @@
 		{
 			_world.iconNavRight();
 		}
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Down || event.key.code == sf::Keyboard::Key::Up) {
+			GEX::StateID pushableState = _world.getCurrentIconState();
+			//replace this switch when all states are implemented, only in place to prevent null crashes
+			switch (pushableState) {
+			case GEX::StateID::Inventory:
+				requestStackPush(pushableState);
+			}
+		}
 
 		return true;
 	}

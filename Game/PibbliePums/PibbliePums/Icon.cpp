@@ -8,6 +8,7 @@ namespace GEX {
 		switch (id) {
 			case IconID::FoodInv:
 				_sprite = sf::Sprite(textures.get(TextureID::FoodInvIcon), sf::IntRect(0, 0, 32, 32));
+				_state = GEX::StateID::Inventory;
 				break;
 			case IconID::Games:
 				_sprite = sf::Sprite(textures.get(TextureID::GameIcon), sf::IntRect(0, 0, 32, 32));
@@ -34,6 +35,11 @@ namespace GEX {
 	sf::FloatRect Icon::getBoundingBox() const
 	{
 		return sf::FloatRect();
+	}
+
+	StateID Icon::getState()
+	{
+		return _state;
 	}
 
 	void Icon::updateCurrent(sf::Time dt, CommandQueue & commands)

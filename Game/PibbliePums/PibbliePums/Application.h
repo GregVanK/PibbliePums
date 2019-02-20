@@ -18,6 +18,7 @@
 #include "TitleState.h"
 #include "GexState.h"
 #include "GameOverState.h"
+#include "InventoryState.h"
 #include "SoundPlayer.h"
 class Application
 {

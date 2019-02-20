@@ -12,6 +12,7 @@ namespace GEX {
 		Pause,
 		GameOver,
 		Gex,
+		Inventory,
 		None
 	};
 }
