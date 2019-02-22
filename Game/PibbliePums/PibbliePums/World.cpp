@@ -219,7 +219,6 @@ namespace GEX {
 		sf::IntRect textureRect(_worldBounds);
 		texture.setRepeated(false);
 		std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
-		sf::Sprite bub = backgroundSprite.get();
 		backgroundSprite->setPosition(_worldBounds.left, _worldBounds.top);
 		backgroundSprite->scale(2, 2);
 		_sceneLayers[Background]->attachChild(std::move(backgroundSprite));
