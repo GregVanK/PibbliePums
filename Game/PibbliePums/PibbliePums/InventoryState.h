@@ -5,7 +5,7 @@
 	class InventoryState : public GEX::State
 	{
 	public:
-		InventoryState(GEX::StateStack& stack, Context context,GEX::Pet& pet);
+		InventoryState(GEX::StateStack& stack, Context context);
 		void					draw() override;
 		bool					update(sf::Time dt) override;
 		bool					handleEvents(const sf::Event& event) override;

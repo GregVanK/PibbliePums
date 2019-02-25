@@ -10,6 +10,10 @@ namespace GEX {
 	}
 }
 
+GEX::Pet::Pet()
+{
+}
+
 GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = true) :
 	Entity(),
 	_sprite(textures.get(TABLE.at(type).texture), sf::IntRect(1, 1, 1, 1)),
@@ -55,6 +59,10 @@ unsigned int GEX::Pet::getCategory() const
 sf::FloatRect GEX::Pet::getBoundingBox() const
 {
 	return sf::FloatRect();
+}
+//Post Contructor used for building pet after
+void GEX::Pet::initializePet()
+{
 }
 
 void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)

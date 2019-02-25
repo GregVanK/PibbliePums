@@ -8,7 +8,7 @@
 
 	Gamestate::Gamestate(GEX::StateStack & stack, Context context)
 		:State(stack,context),
-		_world(*context.window,*context.sound),
+		_world(*context.window,*context.sound,context.pet),
 		player(*context.player)
 	{
 		//context.music->play(GEX::MusicID::MissionTheme);

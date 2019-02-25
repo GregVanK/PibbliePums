@@ -20,7 +20,7 @@ namespace GEX {
 	// car3
 	// truck
 
-	World::World(sf::RenderTarget& outputTarget, SoundPlayer& sounds) : _target(outputTarget),
+	World::World(sf::RenderTarget& outputTarget, SoundPlayer& sounds, Pet* pet) : _target(outputTarget),
 		_worldview(outputTarget.getDefaultView()),
 		_textures(),
 		_sceneGraph(),
@@ -33,7 +33,15 @@ namespace GEX {
 		_sceneTexture.create(_target.getSize().x, _target.getSize().y);
 		loadTextures();
 		
+		
+
 		buildScene();
+		std::unique_ptr<Pet> petEntity(new Pet(PetName::EggBaby, _textures, true));
+		petEntity->setPosition(_spawnPosition);
+		_pet = petEntity.get();
+		_sceneLayers[UpperField]->attachChild(std::move(petEntity));
+
+		pet = _pet;
 		
 		//prep the view
 		_worldview.setCenter(_worldview.getSize().x / 2.f, _worldBounds.height - _worldview.getSize().y / 2.f);
@@ -226,10 +234,7 @@ namespace GEX {
 		//playerEntity->setPosition(_spawnPosition);
 		//_player = playerEntity.get();
 		//_sceneLayers[UpperField]->attachChild(std::move(playerEntity));
-		std::unique_ptr<Pet> petEntity(new Pet(PetName::EggBaby , _textures, true));
-		petEntity->setPosition(_spawnPosition);
-		_pet = petEntity.get();
-		_sceneLayers[UpperField]->attachChild(std::move(petEntity));
+		
 
 		//Obstacles
 		//addObstacles();

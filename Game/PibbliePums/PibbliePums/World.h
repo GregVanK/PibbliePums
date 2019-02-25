@@ -31,7 +31,7 @@ namespace GEX {
 	class World
 	{
 	public:
-		World(sf::RenderTarget& outputTarget,SoundPlayer& sounds);
+		World(sf::RenderTarget& outputTarget,SoundPlayer& sounds,Pet* pet);
 		~World();
 		void							update(sf::Time dt);
 		void adaptPlayerPosition();

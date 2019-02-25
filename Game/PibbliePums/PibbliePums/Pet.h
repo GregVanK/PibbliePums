@@ -34,11 +34,13 @@ namespace GEX {
 			Happy,
 			Sick
 		};
+		Pet();
 		Pet(PetName type, const TextureManager& textures, bool flippable);
 		virtual void				drawcurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 		unsigned int				getCategory() const override;
 		sf::FloatRect				getBoundingBox()const override;
 		Inventory&					getInventory() { return _inventory; }
+		void						initializePet();
 		
 	protected:
 		void						updateCurrent(sf::Time dt, CommandQueue& commands) override;

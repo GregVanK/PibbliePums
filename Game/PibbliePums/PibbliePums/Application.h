@@ -41,6 +41,7 @@ private:
 	GEX::StateStack _stateStack;
 	GEX::MusicPlayer _music;
 	GEX::SoundPlayer _sound;
+	GEX::Pet _pet;
 	sf::Font _font;
 	static const int WIDTH = 480;
 	static const int HEIGHT = 600;

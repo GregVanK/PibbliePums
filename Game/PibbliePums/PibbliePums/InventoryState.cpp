@@ -4,10 +4,10 @@
 #include <algorithm>
 
 
-InventoryState::InventoryState(GEX::StateStack & stack, Context context,GEX::Pet& pet):
+InventoryState::InventoryState(GEX::StateStack & stack, Context context):
 	State(stack, context),
 	_backgroundSprite(),
-	_inventory(pet.getInventory())
+	_inventory(context.pet->getInventory())
 {
 	_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::InventoryScreen));
 	_backgroundSprite.scale(2, 2);
