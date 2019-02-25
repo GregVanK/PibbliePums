@@ -1,25 +1,18 @@
 #include "InventoryState.h"
 #include "Utility.h"
 #include "FontManager.h"
+#include <algorithm>
 
 
-InventoryState::InventoryState(GEX::StateStack & stack, Context context):
-	State(stack,context),
+InventoryState::InventoryState(GEX::StateStack & stack, Context context,GEX::Pet& pet):
+	State(stack, context),
 	_backgroundSprite(),
-	_demoText()
+	_inventory(pet.getInventory())
 {
 	_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::InventoryScreen));
 	_backgroundSprite.scale(2, 2);
 	//create text
-	_demoText.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
-	_demoText.setString("This is a demo of the Inventory Screen");
-	_demoText.setCharacterSize(30);
-	centerOrigin(_demoText);
-	//position text
-	sf::Vector2f viewSize = context.window->getView().getSize();
-	_demoText.setPosition(0.5f * viewSize.x, 0.2f * viewSize.y);
-	_demoText.setFillColor(sf::Color::Black);
-	
+	generateInventoryDisplay();
 }
 
 void InventoryState::draw()
@@ -28,7 +21,9 @@ void InventoryState::draw()
 	sf::RenderWindow& window = *getContext().window;
 	window.setView(window.getDefaultView());
 	window.draw(_backgroundSprite);
-	//window.draw(_demoText);
+	for (auto text : _itemTexts) {
+		window.draw(_backgroundSprite);
+	}
 }
 
 bool InventoryState::update(sf::Time dt)
@@ -40,7 +35,28 @@ bool InventoryState::handleEvents(const sf::Event & event)
 {
 	if (event.type != sf::Event::KeyPressed)
 		return false;
-	if (event.key.code == sf::Keyboard::Down)
+	if (event.key.code == sf::Keyboard::Space)
+		requestStackPop();
+	if (event.key.code == sf::Keyboard::Left)
+		requestStackPop();
+	if (event.key.code == sf::Keyboard::Right)
 		requestStackPop();
 	return false;
+}
+
+void InventoryState::generateInventoryDisplay()
+{
+	std::list<GEX::Food>::iterator it = _inventory.getItems().begin();
+	int i = 1;
+	for (it = _inventory.getItems().begin(); it != _inventory.getItems().end(); ++it) {
+		sf::Text foodDisplay;
+		foodDisplay.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
+		foodDisplay.setString(it->getName());
+		foodDisplay.setCharacterSize(30);
+		centerOrigin(foodDisplay);
+		foodDisplay.setPosition(40,i *40);
+		i++;
+		foodDisplay.setFillColor(sf::Color::Magenta);
+		_itemTexts.push_back(foodDisplay);
+	}
 }

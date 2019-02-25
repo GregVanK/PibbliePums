@@ -9,6 +9,7 @@
 #include "StateIdentifiers.h"
 #include "MusicPlayer.h"
 #include "SoundPlayer.h"
+#include "Pet.h"
 #include <memory>
 namespace GEX {
 	class StateStack;
@@ -25,6 +26,7 @@ namespace GEX {
 			PlayerControl*		player;
 			MusicPlayer*		music;
 			SoundPlayer*		sound;
+
 		};
 		State(StateStack& stack, Context context);
 		virtual					~State();

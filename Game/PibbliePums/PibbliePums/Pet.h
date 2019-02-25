@@ -8,6 +8,7 @@
 #include <time.h>
 #include <chrono>
 #include <ctime> 
+#include "Inventory.h"
 namespace GEX {
 	enum class PetName {
 		EggBaby,
@@ -37,6 +38,7 @@ namespace GEX {
 		virtual void				drawcurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 		unsigned int				getCategory() const override;
 		sf::FloatRect				getBoundingBox()const override;
+		Inventory&					getInventory() { return _inventory; }
 		
 	protected:
 		void						updateCurrent(sf::Time dt, CommandQueue& commands) override;
@@ -56,8 +58,9 @@ namespace GEX {
 		std::chrono::system_clock::time_point	_birthday;
 		std::chrono::system_clock::time_point	_evoTime;
 		const TextureManager*					_textureManager;
-
 		bool							_agedUp;
+
+		Inventory						_inventory;
 	};
 }
 

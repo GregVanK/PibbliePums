@@ -16,8 +16,6 @@ namespace GEX {
 	{
 		const std::map<ObstacleType, ObstacleData> TABLE = initalizeObstacleData();
 	}
-	const sf::Time TIMETILLCAR1SPAWN = sf::seconds(1.5f);
-	const sf::Time TIMETILLTRACTORSPAWN = sf::seconds(2.0f);
 	// car2
 	// car3
 	// truck

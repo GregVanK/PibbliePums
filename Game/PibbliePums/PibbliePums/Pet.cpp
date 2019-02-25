@@ -20,7 +20,8 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_state(State::Idle),
 	_agedUp(false),
 	_petType(type),
-	_textureManager(&textures)
+	_textureManager(&textures),
+	_inventory()
 
 {
 	_birthday = std::chrono::system_clock::now();
@@ -35,6 +36,8 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_sprite.scale(4, 4);
 	srand(time(NULL));
 	_animations[_state].restart();
+
+	_inventory.addFood(FoodType::Burger);
 }
 
 

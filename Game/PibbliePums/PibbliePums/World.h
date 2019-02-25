@@ -46,6 +46,7 @@ namespace GEX {
 		void							iconNavLeft();
 		void							iconNavRight();
 		StateID							getCurrentIconState();
+		Pet&							getCurrentPet() { return *_pet; }
 
 		enum Layer {
 			Background = 0,

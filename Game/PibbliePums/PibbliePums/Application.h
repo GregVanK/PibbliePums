@@ -20,6 +20,7 @@
 #include "GameOverState.h"
 #include "InventoryState.h"
 #include "SoundPlayer.h"
+#include "Pet.h"
 class Application
 {
 public:

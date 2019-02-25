@@ -37,11 +37,13 @@
     <ClCompile Include="EmitterNode.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="Frog.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="Gamestate.cpp" />
     <ClCompile Include="GexState.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryState.cpp" />
     <ClCompile Include="JsonFrameParser.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -78,11 +80,13 @@
     <ClInclude Include="EmitterNode.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="Frog.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="Gamestate.h" />
     <ClInclude Include="GexState.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryState.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="JsonFrameParser.h" />
