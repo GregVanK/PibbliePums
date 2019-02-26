@@ -16,7 +16,7 @@ Application::Application()
 	_player(),
 	_font(),
 	_textures(),
-	_stateStack(GEX::State::Context(_window,_textures,_font,_player,_music,_sound,_pet)), 
+	_stateStack(GEX::State::Context(_window,_textures,_font,_player,_music,_sound)), 
 	_statNumFrames(0)
 {
 	

@@ -20,13 +20,12 @@ namespace GEX {
 	public:
 		typedef std::unique_ptr<State> Ptr;
 		struct Context {
-			Context(sf::RenderWindow& window, TextureManager& textures, sf::Font& font, PlayerControl& player, MusicPlayer& music, SoundPlayer& sound, Pet& pet);
+			Context(sf::RenderWindow& window, TextureManager& textures, sf::Font& font, PlayerControl& player, MusicPlayer& music, SoundPlayer& sound);
 			sf::RenderWindow*	window;
 			TextureManager*		textures;
 			PlayerControl*		player;
 			MusicPlayer*		music;
 			SoundPlayer*		sound;
-			Pet*				pet;
 
 		};
 		State(StateStack& stack, Context context);

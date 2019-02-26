@@ -29,7 +29,7 @@ namespace GEX {
 		return _context;
 	}
 	
-	State::Context::Context(sf::RenderWindow & window, TextureManager & textures, sf::Font & font, PlayerControl & player, MusicPlayer & music, SoundPlayer & sound,Pet & pet) :window(&window), textures(&textures), player(&player), music(&music), sound(&sound),pet(&pet) //RE INITALIZE
+	State::Context::Context(sf::RenderWindow & window, TextureManager & textures, sf::Font & font, PlayerControl & player, MusicPlayer & music, SoundPlayer & sound) :window(&window), textures(&textures), player(&player), music(&music), sound(&sound) //RE INITALIZE
 	{
 	}
 

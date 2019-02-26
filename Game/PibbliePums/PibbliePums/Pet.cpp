@@ -10,7 +10,19 @@ namespace GEX {
 	}
 }
 
-GEX::Pet::Pet()
+GEX::Pet* GEX::Pet::_instance = nullptr;
+
+GEX::Pet::Pet():
+	_sprite(),
+	_position(Position::Center),
+	_movementTimer(sf::Time::Zero),
+	_isFlippable(false),
+	_facing(Facing::Left),
+	_state(State::Idle),
+	_agedUp(false),
+	_petType(PetName::EggBaby),
+	_textureManager(),
+	_inventory()
 {
 }
 
@@ -42,6 +54,8 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_animations[_state].restart();
 
 	_inventory.addFood(FoodType::Burger);
+
+	_instance = this;
 }
 
 
@@ -60,9 +74,15 @@ sf::FloatRect GEX::Pet::getBoundingBox() const
 {
 	return sf::FloatRect();
 }
-//Post Contructor used for building pet after
-void GEX::Pet::initializePet()
+
+
+
+GEX::Pet & GEX::Pet::getInstance()
 {
+	//if (!_instance) {
+	//	Pet::_instance = new Pet();
+	//}
+	return *Pet::_instance;
 }
 
 void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)

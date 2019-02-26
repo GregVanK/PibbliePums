@@ -10,6 +10,8 @@
 #include <ctime> 
 #include "Inventory.h"
 namespace GEX {
+	
+
 	enum class PetName {
 		EggBaby,
 		MelonChan
@@ -40,7 +42,9 @@ namespace GEX {
 		unsigned int				getCategory() const override;
 		sf::FloatRect				getBoundingBox()const override;
 		Inventory&					getInventory() { return _inventory; }
-		void						initializePet();
+		static Pet&					getInstance();
+		Pet(Pet const&) = delete;
+		void operator=(Pet const&) = delete;
 		
 	protected:
 		void						updateCurrent(sf::Time dt, CommandQueue& commands) override;
@@ -63,6 +67,8 @@ namespace GEX {
 		bool							_agedUp;
 
 		Inventory						_inventory;
+
+		static Pet*						_instance;
 	};
 }
 
