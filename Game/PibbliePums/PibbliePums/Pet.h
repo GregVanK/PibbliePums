@@ -43,6 +43,8 @@ namespace GEX {
 		sf::FloatRect				getBoundingBox()const override;
 		Inventory&					getInventory() { return _inventory; }
 		static Pet&					getInstance();
+		void						feed(Food f);
+
 		Pet(Pet const&) = delete;
 		void operator=(Pet const&) = delete;
 		
@@ -52,7 +54,12 @@ namespace GEX {
 		void						remove() override;
 		void						updateMovement(sf::Time dt);
 		void						updateAnimations();
+		
 	private:
+		int								_happiness;
+		int								_fullness;
+		int								_weight;
+
 		sf::Sprite						_sprite;
 		Position						_position;
 		Facing							_facing;

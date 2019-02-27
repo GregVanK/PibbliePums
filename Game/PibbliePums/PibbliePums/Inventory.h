@@ -11,6 +11,7 @@ namespace GEX {
 		void addFood(Food f);
 		Food removeFood(int index);
 		std::list<Food> getItems() { return _items; }
+		int				getSize() { return _items.size(); }
 	private:
 		std::list<Food> _items;
 	};

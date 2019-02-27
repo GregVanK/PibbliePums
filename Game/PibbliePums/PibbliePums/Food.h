@@ -2,7 +2,9 @@
 #include <string>
 namespace GEX {
 	enum class FoodType {
-		Burger
+		Burger,
+		Icecream,
+		Carrot
 	};
 	class Food
 	{
@@ -10,6 +12,10 @@ namespace GEX {
 	public:
 		Food(FoodType type);
 		Food();
+		int			getHappiness() { return _happiness; }
+		int			getFullness() { return _fullness; }
+		int			getWeight() { return _weight; }
+		int			getPrice() { return _price; }
 		std::string getName() { return _name; }
 	private:
 		FoodType	_type;

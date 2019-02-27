@@ -10,10 +10,17 @@
 		bool					update(sf::Time dt) override;
 		bool					handleEvents(const sf::Event& event) override;
 		void					generateInventoryDisplay();
+		void					itemNavDown();
+		void					itemNavUp();
+		void					itemSelect();
+		void					updateCursor();
 	private:
 		sf::Sprite				_backgroundSprite;
 		std::vector<sf::Text>	_itemTexts;
+		sf::Sprite				_cursor;
+
 		GEX::Inventory			_inventory;
+		int						_selectedIndex;
 		sf::Vector2f			_viewSize;
 
 	};

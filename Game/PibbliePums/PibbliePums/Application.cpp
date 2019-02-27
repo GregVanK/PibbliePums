@@ -26,6 +26,7 @@ Application::Application()
 	_textures.load(GEX::TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
 	_textures.load(GEX::TextureID::GexScreen, "Media/Textures/face.png");
 	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
+	_textures.load(GEX::TextureID::Cursor, "Media/Textures/Cursor.png");
 	
 	///StatDisplay
 

@@ -21,7 +21,8 @@ namespace GEX {
 		FinishLine,
 		FoodInvIcon,
 		GameIcon,
-		ShopIcon
+		ShopIcon,
+		Cursor
 	};
 	enum class FontID {
 		Main

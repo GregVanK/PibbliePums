@@ -25,6 +25,7 @@ namespace GEX {
 			std::list<Food>::iterator it = _items.begin();
 			std::advance(it, index);
 			returnFood = *it;
+			_items.erase(it);
 		}
 		return returnFood;
 	}
