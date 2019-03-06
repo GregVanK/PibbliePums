@@ -6,6 +6,10 @@ namespace GEX {
 		_isActive(isActive)
 	{
 		switch (id) {
+		case IconID::Stats:
+				_sprite = sf::Sprite(textures.get(TextureID::StatIcon), sf::IntRect(0, 0, 32, 32));
+				_state = GEX::StateID::Stats;
+				break;
 			case IconID::FoodInv:
 				_sprite = sf::Sprite(textures.get(TextureID::FoodInvIcon), sf::IntRect(0, 0, 32, 32));
 				_state = GEX::StateID::Inventory;

@@ -62,7 +62,10 @@
 			switch (pushableState) {
 			case GEX::StateID::Inventory:
 				requestStackPush(pushableState);
+			case GEX::StateID::Stats:
+				requestStackPush(pushableState);
 			}
+
 		}
 
 		return true;

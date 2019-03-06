@@ -2,6 +2,7 @@
 #include "Utility.h"
 #include "FontManager.h"
 #include <algorithm>
+#include <string> 
 
 
 InventoryState::InventoryState(GEX::StateStack & stack, Context context) :
@@ -28,8 +29,12 @@ void InventoryState::draw()
 	for (auto text : _itemTexts) {
 		window.draw(text);
 	}
+	for (auto text : _statTexts) {
+		window.draw(text);
+	}
 	if(_itemTexts.size() != 0)
 		window.draw(_cursor);
+
 }
 
 bool InventoryState::update(sf::Time dt)
@@ -60,19 +65,41 @@ void InventoryState::generateInventoryDisplay()
 	const int DISPLAY_Y_OFFESET = 35;
 	const int ITEM_SIZE = 60;
 	const int ITEM_PADDING = 0;
+	const int STAT_DISPLAY_OFFSET = 200;
+	const int STAT_DISPLAY_SEPERATION = 60;
 
 	int i = 0;
 	for (auto item : _inventory.getItems()) {
+		//set up Food name
 		sf::Text foodDisplay;
 		foodDisplay.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
 		foodDisplay.setString(item.getName());
 		foodDisplay.setCharacterSize(ITEM_SIZE);
-
 		foodDisplay.setPosition(DISPLAY_X_OFFESET, DISPLAY_Y_OFFESET + i * (ITEM_SIZE + ITEM_PADDING));
 		foodDisplay.setStyle(sf::Text::Bold);
-		i++;
 		foodDisplay.setFillColor(sf::Color(217,87,99));
 		_itemTexts.push_back(foodDisplay);
+
+
+		sf::Text happinessDisplay;
+		happinessDisplay.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
+		happinessDisplay.setString(std::to_string(item.getHappiness()));
+		happinessDisplay.setCharacterSize(ITEM_SIZE);
+		happinessDisplay.setPosition(STAT_DISPLAY_OFFSET + STAT_DISPLAY_SEPERATION , DISPLAY_Y_OFFESET + i * (ITEM_SIZE + ITEM_PADDING));
+		happinessDisplay.setStyle(sf::Text::Bold);
+		happinessDisplay.setFillColor(sf::Color::Red);
+		_statTexts.push_back(happinessDisplay);
+
+		sf::Text fullnessDisplay;
+		fullnessDisplay.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
+		fullnessDisplay.setString(std::to_string(item.getFullness()));
+		fullnessDisplay.setCharacterSize(ITEM_SIZE);
+		fullnessDisplay.setPosition(STAT_DISPLAY_OFFSET + (STAT_DISPLAY_SEPERATION * 2), DISPLAY_Y_OFFESET + i * (ITEM_SIZE + ITEM_PADDING));
+		fullnessDisplay.setStyle(sf::Text::Bold);
+		fullnessDisplay.setFillColor(sf::Color(255, 165, 0));
+		_statTexts.push_back(fullnessDisplay);
+
+		i++;
 	}
 
 }

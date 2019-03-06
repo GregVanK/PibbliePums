@@ -11,7 +11,8 @@ namespace GEX {
 		enum class IconID {
 			FoodInv,
 			Games,
-			Shop
+			Shop,
+			Stats
 		};
 		Icon(const TextureManager& textures, IconID id, bool isActive);
 		virtual void				drawcurrent(sf::RenderTarget& target, sf::RenderStates states) const override;

@@ -26,6 +26,7 @@ Application::Application()
 	_textures.load(GEX::TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
 	_textures.load(GEX::TextureID::GexScreen, "Media/Textures/face.png");
 	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
+	_textures.load(GEX::TextureID::StatsScreen, "Media/Textures/stats_background.png");
 	_textures.load(GEX::TextureID::Cursor, "Media/Textures/Cursor.png");
 	
 	///StatDisplay
@@ -117,11 +118,12 @@ void Application::render()
 
 void Application::registerStates()
 {
-	_stateStack.registerState<TitleState>(GEX::StateID::Title),
+	_stateStack.registerState<TitleState>(GEX::StateID::Title);
 	_stateStack.registerState<MenuState>(GEX::StateID::Menu);
 	_stateStack.registerState<Gamestate>(GEX::StateID::Game);
 	_stateStack.registerState<PauseState>(GEX::StateID::Pause);
 	_stateStack.registerState<GexState>(GEX::StateID::Gex);
 	_stateStack.registerState<GameOverState>(GEX::StateID::GameOver);
 	_stateStack.registerState<InventoryState>(GEX::StateID::Inventory);
+	_stateStack.registerState<GEX::StatsState>(GEX::StateID::Stats);
 }

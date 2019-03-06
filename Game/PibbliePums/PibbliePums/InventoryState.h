@@ -17,6 +17,7 @@
 	private:
 		sf::Sprite				_backgroundSprite;
 		std::vector<sf::Text>	_itemTexts;
+		std::vector<sf::Text>	_statTexts;
 		sf::Sprite				_cursor;
 
 		GEX::Inventory			_inventory;

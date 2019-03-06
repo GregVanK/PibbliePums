@@ -195,6 +195,7 @@ namespace GEX {
 		_textures.load(GEX::TextureID::Landscape, "Media/Textures/room.png");
 		_textures.load(GEX::TextureID::EggBaby, "Media/Textures/pets/eggie/baby_egg.png");
 		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
+		_textures.load(GEX::TextureID::StatIcon, "Media/Textures/icons/stats.png");
 		_textures.load(GEX::TextureID::FoodInvIcon, "Media/Textures/icons/fruit.png");
 		_textures.load(GEX::TextureID::GameIcon, "Media/Textures/icons/games.png");
 		_textures.load(GEX::TextureID::ShopIcon, "Media/Textures/icons/dollar_sign.png");
@@ -305,18 +306,22 @@ namespace GEX {
 	void World::initalizeIcons()
 	{
 		const float TOP_ROW = 40;
-		std::unique_ptr<Icon> foodIcon(new Icon(_textures, Icon::IconID::FoodInv, true));
+		const float ICON_PADDING = 50;
+		std::unique_ptr<Icon> statsIcon(new Icon(_textures, Icon::IconID::Stats, true));
+		std::unique_ptr<Icon> foodIcon(new Icon(_textures, Icon::IconID::FoodInv, false));
 		std::unique_ptr<Icon> gameIcon(new Icon(_textures, Icon::IconID::Games, false));
 		std::unique_ptr<Icon> shopIcon(new Icon(_textures, Icon::IconID::Shop, false));
+		_icons.push_back(statsIcon.get());
 		_icons.push_back(foodIcon.get());
 		_icons.push_back(gameIcon.get());
 		_icons.push_back(shopIcon.get());
+		_sceneLayers[UpperField]->attachChild(std::move(statsIcon));
 		_sceneLayers[UpperField]->attachChild(std::move(foodIcon));
 		_sceneLayers[UpperField]->attachChild(std::move(gameIcon));
 		_sceneLayers[UpperField]->attachChild(std::move(shopIcon));
 		for (int i = 0; i < _icons.size(); i++) {
 			//gets a relative position based on amount of icons loaded
-			float xPos = (((i) * (getViewBounds().width / (_icons.size()))) + 50);
+			float xPos = (((i) * (getViewBounds().width / (_icons.size()))) + ICON_PADDING);
 			_icons[i]->setPosition(sf::Vector2f(xPos, TOP_ROW));
 
 		}

@@ -42,6 +42,7 @@ namespace GEX {
 		unsigned int				getCategory() const override;
 		sf::FloatRect				getBoundingBox()const override;
 		Inventory&					getInventory() { return _inventory; }
+		PetName						getPetName() { return _petType; }
 		static Pet&					getInstance();
 		void						feed(Food f);
 
