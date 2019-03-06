@@ -24,7 +24,21 @@ namespace GEX {
 		FoodInvIcon,
 		GameIcon,
 		ShopIcon,
-		Cursor
+		Cursor,
+
+		HappinessIcon,
+		FullnessIcon,
+		WeightIcon,
+		MoneyIcon,
+
+		BabyMeter0,
+		BabyMeter1,
+		BabyMeter2,
+		BabyMeter3,
+
+		EggIcon,
+		MelonChanIcon
+
 	};
 	enum class FontID {
 		Main

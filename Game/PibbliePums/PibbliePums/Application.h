@@ -34,6 +34,7 @@ private:
 	void render();
 	void registerStates();
 private:
+	void loadIcons();
 	static const sf::Time	TimePerFrame;
 	sf::RenderWindow _window;
 

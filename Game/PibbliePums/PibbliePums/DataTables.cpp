@@ -201,6 +201,7 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	std::map<GEX::PetName, GEX::PetData> data;
 	JsonFrameParser frames = JsonFrameParser("Media/Textures/pets/eggie/baby_egg.json");
 	data[PetName::EggBaby].texture = TextureID::EggBaby;
+	data[PetName::EggBaby].iconTexture = TextureID::EggIcon;
 	data[PetName::EggBaby].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("egg_idle"));
 	data[PetName::EggBaby].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
 	data[PetName::EggBaby].animations[Pet::State::Idle].setRepeating(true);
@@ -214,8 +215,10 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::EggBaby].animations[Pet::State::Happy].setRepeating(true);
 
 
+
 	frames = JsonFrameParser("Media/Textures/pets/melon-chan/melon-chan.json");
 	data[PetName::MelonChan].texture = TextureID::MelonChan;
+	data[PetName::MelonChan].iconTexture = TextureID::MelonChanIcon;
 	data[PetName::MelonChan].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("melon_idle"));
 	data[PetName::MelonChan].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
 	data[PetName::MelonChan].animations[Pet::State::Idle].setRepeating(true);

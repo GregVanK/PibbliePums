@@ -47,6 +47,7 @@ namespace GEX {
 		std::vector<Direction>					directions;
 		float									speed;
 		bool									isFlippable;
+		TextureID								iconTexture;
 	};
 
 	struct PickupData {

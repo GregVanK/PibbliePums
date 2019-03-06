@@ -28,6 +28,9 @@ Application::Application()
 	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
 	_textures.load(GEX::TextureID::StatsScreen, "Media/Textures/stats_background.png");
 	_textures.load(GEX::TextureID::Cursor, "Media/Textures/Cursor.png");
+
+	loadIcons();
+	
 	
 	///StatDisplay
 
@@ -126,4 +129,23 @@ void Application::registerStates()
 	_stateStack.registerState<GameOverState>(GEX::StateID::GameOver);
 	_stateStack.registerState<InventoryState>(GEX::StateID::Inventory);
 	_stateStack.registerState<GEX::StatsState>(GEX::StateID::Stats);
+}
+
+void Application::loadIcons()
+{
+	//stat icons
+	_textures.load(GEX::TextureID::HappinessIcon, "Media/Textures/icons/happpiness_icon.png");
+	_textures.load(GEX::TextureID::FullnessIcon, "Media/Textures/icons/fullness_icon.png");
+	_textures.load(GEX::TextureID::WeightIcon, "Media/Textures/icons/weight_icon.png");
+	_textures.load(GEX::TextureID::MoneyIcon, "Media/Textures/icons/money_icon.png");
+
+	//meter icons
+	_textures.load(GEX::TextureID::BabyMeter0, "Media/Textures/icons/meter/baby_meter_0.png");
+	_textures.load(GEX::TextureID::BabyMeter1, "Media/Textures/icons/meter/baby_meter_1.png");
+	_textures.load(GEX::TextureID::BabyMeter2, "Media/Textures/icons/meter/baby_meter_2.png");
+	_textures.load(GEX::TextureID::BabyMeter3, "Media/Textures/icons/meter/baby_meter_3.png");
+
+	//pet stat icons
+	_textures.load(GEX::TextureID::EggIcon, "Media/Textures/icons/pet_icons/egg_icon.png");
+	_textures.load(GEX::TextureID::MelonChanIcon, "Media/Textures/icons/pet_icons/melon-chan_icon.png");
 }

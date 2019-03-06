@@ -38,9 +38,11 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_petType(type),
 	_textureManager(&textures),
 	_inventory(),
-	_happiness(3),
-	_fullness(3),
-	_weight(10)
+	_happiness(0),
+	_fullness(0),
+	_weight(10),
+	_maxStatValue(3),
+	_money(100)
 
 {
 	_birthday = std::chrono::system_clock::now();
@@ -80,6 +82,27 @@ unsigned int GEX::Pet::getCategory() const
 sf::FloatRect GEX::Pet::getBoundingBox() const
 {
 	return sf::FloatRect();
+}
+
+int GEX::Pet::getHappiness()
+{
+	if (_happiness > _maxStatValue)
+		return _maxStatValue;
+	else if (_happiness < 0)
+		return 0;
+	else
+		return _happiness;
+
+}
+
+int GEX::Pet::getFullness()
+{
+	if (_fullness > _maxStatValue)
+		return _maxStatValue;
+	else if (_fullness < 0)
+		return 0;
+	else
+		return _fullness;
 }
 
 

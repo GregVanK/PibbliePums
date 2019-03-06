@@ -43,6 +43,11 @@ namespace GEX {
 		sf::FloatRect				getBoundingBox()const override;
 		Inventory&					getInventory() { return _inventory; }
 		PetName						getPetName() { return _petType; }
+		int							getMoney() { return _money; }
+		int							getHappiness();
+		int							getFullness();
+		int							getWeight() { return _weight; }
+
 		static Pet&					getInstance();
 		void						feed(Food f);
 
@@ -57,9 +62,12 @@ namespace GEX {
 		void						updateAnimations();
 		
 	private:
+		int								_maxStatValue;
+
 		int								_happiness;
 		int								_fullness;
 		int								_weight;
+		int								_money;
 
 		sf::Sprite						_sprite;
 		Position						_position;

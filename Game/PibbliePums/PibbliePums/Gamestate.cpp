@@ -36,17 +36,6 @@
 	{
 		GEX::CommandQueue& commands = _world.getCommandQueue();
 		player.handleEvent(event,commands);
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Escape)
-			requestStackPush(GEX::StateID::Pause);
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::G)
-			requestStackPush(GEX::StateID::Gex);
-
-
-
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Delete) { //set to delete rather than Q since Q is my rotate key
-			requestStackClear();
-			requestStackPush(GEX::StateID::Menu);
-		}
 
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Left)
 		{
@@ -62,8 +51,10 @@
 			switch (pushableState) {
 			case GEX::StateID::Inventory:
 				requestStackPush(pushableState);
+				break;
 			case GEX::StateID::Stats:
 				requestStackPush(pushableState);
+				break;
 			}
 
 		}
