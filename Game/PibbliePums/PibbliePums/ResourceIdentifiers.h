@@ -17,6 +17,7 @@ namespace GEX {
 		TitleScreen, 
 		GexScreen,
 		InventoryScreen,
+		ShopScreen,
 		StatsScreen,
 		Explosion,Particle,
 		FinishLine,

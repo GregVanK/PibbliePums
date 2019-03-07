@@ -14,6 +14,7 @@ namespace GEX {
 		Gex,
 		Stats,
 		Inventory,
+		Shop,
 		None
 	};
 }

@@ -19,6 +19,7 @@ namespace GEX {
 				break;
 			case IconID::Shop:
 				_sprite = sf::Sprite(textures.get(TextureID::ShopIcon), sf::IntRect(0, 0, 32, 32));
+				_state = GEX::StateID::Shop;
 				break;
 
 		}

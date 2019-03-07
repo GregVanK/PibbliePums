@@ -55,7 +55,11 @@
 			case GEX::StateID::Stats:
 				requestStackPush(pushableState);
 				break;
+			case GEX::StateID::Shop:
+				requestStackPush(pushableState);
+				break;
 			}
+			
 
 		}
 

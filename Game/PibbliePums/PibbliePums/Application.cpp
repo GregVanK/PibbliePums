@@ -28,6 +28,7 @@ Application::Application()
 	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
 	_textures.load(GEX::TextureID::StatsScreen, "Media/Textures/stats_background.png");
 	_textures.load(GEX::TextureID::Cursor, "Media/Textures/Cursor.png");
+	_textures.load(GEX::TextureID::ShopScreen, "Media/Textures/shop_background.png");
 
 	loadIcons();
 	
@@ -129,6 +130,7 @@ void Application::registerStates()
 	_stateStack.registerState<GameOverState>(GEX::StateID::GameOver);
 	_stateStack.registerState<InventoryState>(GEX::StateID::Inventory);
 	_stateStack.registerState<GEX::StatsState>(GEX::StateID::Stats);
+	_stateStack.registerState<GEX::ShopState>(GEX::StateID::Shop);
 }
 
 void Application::loadIcons()
