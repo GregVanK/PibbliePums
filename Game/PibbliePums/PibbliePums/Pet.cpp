@@ -58,12 +58,12 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	srand(time(NULL));
 	_animations[_state].restart();
 
-	_inventory.addFood(FoodType::Burger);
-	_inventory.addFood(FoodType::Icecream);
+	_inventory.addFood(Food::FoodType::Burger);
+	_inventory.addFood(Food::FoodType::Icecream);
 
 	_instance = this;
 	//test if instant must be updated
-	_inventory.addFood(FoodType::Carrot);
+	_inventory.addFood(Food::FoodType::Carrot);
 
 }
 

@@ -16,14 +16,22 @@ namespace GEX {
 		void					draw() override;
 		bool					update(sf::Time dt) override;
 		bool					handleEvents(const sf::Event& event) override;
+		void					generateInventory();
 	private:
 		void				updateDisplay();
+		void itemNavDown();
+		void itemNavUp();
+		void updateCursor();
+		void itemSelect();
 	private:
 		sf::Sprite			_backgroundSprite;
 		Inventory			_inventory;
 		std::vector<std::string> _shopkeepQuotes;
 
 		std::vector<sf::Text> _drawableTexts;
+		std::vector<sf::Text> _itemTexts;
+		sf::Sprite			_cursor;
+		int					_selectedIndex;
 		
 	};
 }

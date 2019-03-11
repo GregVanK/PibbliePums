@@ -9,6 +9,7 @@
 #include <chrono>
 #include <ctime> 
 #include "Inventory.h"
+#include "Food.h"
 namespace GEX {
 	
 

@@ -13,7 +13,7 @@ namespace GEX {
 
 	void Inventory::addFood(Food f)
 	{
-		if (_items.size() <= 5) {
+		if (_items.size() <= 4) {
 			_items.push_back(f);
 		}
 	}

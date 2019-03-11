@@ -1,15 +1,17 @@
 #pragma once
 #include <string>
 namespace GEX {
-	enum class FoodType {
-		Burger,
-		Icecream,
-		Carrot
-	};
 	class Food
 	{
 
 	public:
+		enum class FoodType {
+			Burger,
+			Icecream,
+			Carrot,
+
+			last
+		};
 		Food(FoodType type);
 		Food();
 		int			getHappiness() { return _happiness; }
