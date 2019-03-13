@@ -47,6 +47,7 @@
     <ClCompile Include="InventoryState.cpp" />
     <ClCompile Include="JsonFrameParser.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MiniGameState.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ParticleNode.cpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="JsonFrameParser.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MiniGameState.h" />
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Particle.h" />
