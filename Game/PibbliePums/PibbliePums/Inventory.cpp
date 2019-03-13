@@ -1,8 +1,5 @@
 #include "Inventory.h"
 
-
-
-
 namespace GEX {
 	Inventory::Inventory()
 	{
