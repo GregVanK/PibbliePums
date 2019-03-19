@@ -15,6 +15,7 @@ namespace GEX {
 		Stats,
 		Inventory,
 		Shop,
+		Minigame,
 		None
 	};
 }

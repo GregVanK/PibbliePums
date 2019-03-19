@@ -19,6 +19,7 @@ namespace GEX {
 		InventoryScreen,
 		ShopScreen,
 		StatsScreen,
+		MinigameScreen,
 		Explosion,Particle,
 		FinishLine,
 		StatIcon,
@@ -31,6 +32,10 @@ namespace GEX {
 		FullnessIcon,
 		WeightIcon,
 		MoneyIcon,
+
+		RockIcon,
+		PaperIcon,
+		ScissorsIcon,
 
 		BabyMeter0,
 		BabyMeter1,

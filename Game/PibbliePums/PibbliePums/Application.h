@@ -21,8 +21,10 @@
 #include "InventoryState.h"
 #include "StatsState.h"
 #include "ShopState.h"
+#include "MiniGameState.h"
 #include "SoundPlayer.h"
 #include "Pet.h"
+
 class Application
 {
 public:
