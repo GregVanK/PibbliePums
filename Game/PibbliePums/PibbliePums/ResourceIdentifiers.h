@@ -27,6 +27,7 @@ namespace GEX {
 		GameIcon,
 		ShopIcon,
 		Cursor,
+		CPUCursor,
 
 		HappinessIcon,
 		FullnessIcon,

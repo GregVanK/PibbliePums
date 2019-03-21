@@ -30,6 +30,7 @@ namespace GEX {
 
 		std::vector<sf::Text> _drawableTexts;
 		std::vector<sf::Text> _itemTexts;
+		sf::Text			_shopKeepSpeech;
 		sf::Sprite			_cursor;
 		int					_selectedIndex;
 		

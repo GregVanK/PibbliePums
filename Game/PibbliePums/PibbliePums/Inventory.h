@@ -8,10 +8,12 @@ namespace GEX {
 		Inventory();
 		Inventory(std::list<Food> inventory);
 	public:
-		void addFood(Food f);
-		Food removeFood(int index);
+		void			addFood(Food f);
+		Food			removeFood(int index);
+		Food			getFood(int index);
 		std::list<Food> getItems() { return _items; }
 		int				getSize() { return _items.size(); }
+		
 	private:
 		std::list<Food> _items;
 	};

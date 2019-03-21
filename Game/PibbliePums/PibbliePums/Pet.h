@@ -48,6 +48,7 @@ namespace GEX {
 		int							getHappiness();
 		int							getFullness();
 		int							getWeight() { return _weight; }
+		void						addMoney(int m) { _money += m; }
 
 		static Pet&					getInstance();
 		void						feed(Food f);

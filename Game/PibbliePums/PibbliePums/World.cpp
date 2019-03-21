@@ -200,6 +200,8 @@ namespace GEX {
 		_textures.load(GEX::TextureID::GameIcon, "Media/Textures/icons/games.png");
 		_textures.load(GEX::TextureID::ShopIcon, "Media/Textures/icons/dollar_sign.png");
 
+		
+
 
 		
 	}

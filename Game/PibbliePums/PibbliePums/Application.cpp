@@ -28,8 +28,14 @@ Application::Application()
 	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
 	_textures.load(GEX::TextureID::StatsScreen, "Media/Textures/stats_background.png");
 	_textures.load(GEX::TextureID::Cursor, "Media/Textures/Cursor.png");
+	_textures.load(GEX::TextureID::CPUCursor, "Media/Textures/Cursor_Cpu.png");
 	_textures.load(GEX::TextureID::ShopScreen, "Media/Textures/shop_background.png");
 	_textures.load(GEX::TextureID::MinigameScreen, "Media/Textures/minigame_background2.png");
+
+	//load minigame textures
+	_textures.load(GEX::TextureID::RockIcon, "Media/Textures/icons/rock.png");
+	_textures.load(GEX::TextureID::PaperIcon, "Media/Textures/icons/paper.png");
+	_textures.load(GEX::TextureID::ScissorsIcon, "Media/Textures/icons/scissors.png");
 
 	loadIcons();
 	

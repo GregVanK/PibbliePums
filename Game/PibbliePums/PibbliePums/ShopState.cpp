@@ -39,6 +39,7 @@ namespace GEX {
 
 	bool GEX::ShopState::update(sf::Time dt)
 	{
+
 		return false;
 	}
 
@@ -76,15 +77,15 @@ namespace GEX {
 		const int DISPLAY_Y_OFFESET = 35;
 		const int ITEM_SIZE = 35;
 
-		sf::Text shopKeepSpeech;
-		shopKeepSpeech.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
+		
+		_shopKeepSpeech.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
 		int quoteIndex = rand() % _shopkeepQuotes.size();
-		shopKeepSpeech.setString(_shopkeepQuotes[quoteIndex]);
-		shopKeepSpeech.setPosition(SHOP_SPEECH_TEXT_X, SHOP_SPEECH_TEXT_Y);
-		shopKeepSpeech.setCharacterSize(SHOP_SPEECH_TEXT_SIZE);
-		shopKeepSpeech.setStyle(sf::Text::Bold);
-		shopKeepSpeech.setFillColor(sf::Color::Black);
-		_drawableTexts.push_back(shopKeepSpeech);
+		_shopKeepSpeech.setString(_shopkeepQuotes[quoteIndex]);
+		_shopKeepSpeech.setPosition(SHOP_SPEECH_TEXT_X, SHOP_SPEECH_TEXT_Y);
+		_shopKeepSpeech.setCharacterSize(SHOP_SPEECH_TEXT_SIZE);
+		_shopKeepSpeech.setStyle(sf::Text::Bold);
+		_shopKeepSpeech.setFillColor(sf::Color::Black);
+		_drawableTexts.push_back(_shopKeepSpeech);
 		
 		int i = 0;
 		for (auto item : _inventory.getItems()) {
@@ -126,6 +127,14 @@ namespace GEX {
 		}
 	}
 	void ShopState::itemSelect() {
-		Pet::getInstance().getInventory().addFood(_inventory.removeFood(_selectedIndex));
+		if (_inventory.getFood(_selectedIndex).getPrice() <= Pet::getInstance().getMoney()) {
+			Food food = _inventory.removeFood(_selectedIndex);
+			Pet::getInstance().addMoney(-food.getPrice());
+			Pet::getInstance().getInventory().addFood(food);
+		}
+		else {
+			_shopKeepSpeech.setString("Need more money...");
+		}
+		
 	}
 }

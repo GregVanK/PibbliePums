@@ -26,6 +26,17 @@ namespace GEX {
 		}
 		return returnFood;
 	}
+	Food Inventory::getFood(int index)
+	{
+		Food returnFood;
+		if (_items.size() > index) {
+			std::list<Food>::iterator it = _items.begin();
+			std::advance(it, index);
+			returnFood = *it;
+			//_items.erase(it);
+		}
+		return returnFood;
+	}
 
 
 }
