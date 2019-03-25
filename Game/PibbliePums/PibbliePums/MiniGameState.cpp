@@ -11,6 +11,7 @@ namespace GEX {
 		_displayResultsOver(false),
 		_resultsWait(sf::Time::Zero)
 	{
+			
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::MinigameScreen));
 		_cursorPlayer.setTexture(context.textures->get(GEX::TextureID::Cursor));
 		_cursorCPU.setTexture(context.textures->get(GEX::TextureID::CPUCursor));
@@ -48,6 +49,8 @@ namespace GEX {
 			else {
 				_displayResults = false;
 				requestStackPop();
+				forceUpdateState();
+				
 				return true;
 			}
 		}

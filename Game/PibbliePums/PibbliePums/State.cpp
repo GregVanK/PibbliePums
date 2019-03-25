@@ -24,6 +24,9 @@ namespace GEX {
 	{
 		_stack->clearStates();
 	}
+	void State::forceUpdateState() {
+		_stack->forceUpdateStack();
+	}
 	State::Context State::getContext() const
 	{
 		return _context;

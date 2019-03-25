@@ -51,7 +51,7 @@ Application::Application()
 	_stateStack.pushState(GEX::StateID::Game);
 
 	//fixes race condition crash
-	_stateStack.forceInitalizeStack();
+	_stateStack.forceUpdateStack();
 	
 }
 

@@ -38,6 +38,7 @@ namespace GEX {
 		void					requestStackPush(StateID stateID);
 		void					requestStackPop();
 		void					requestStackClear();
+		void forceUpdateState();
 		Context					getContext() const;
 
 	private:

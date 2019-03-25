@@ -51,7 +51,7 @@ bool GEX::StateStack::isEmpty() const
 	return _stack.empty();
 }
 
-void GEX::StateStack::forceInitalizeStack()
+void GEX::StateStack::forceUpdateStack()
 {
 	applyPendingChanges();
 }
