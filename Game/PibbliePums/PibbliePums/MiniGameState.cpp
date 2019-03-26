@@ -1,7 +1,13 @@
 #include "MiniGameState.h"
+#include "Utility.h"
 #include <iostream>
 
 namespace GEX {
+	namespace
+	{
+		const std::map<PetName, PetData> TABLE = initalizePetData();
+	}
+
 	MiniGameState::MiniGameState(GEX::StateStack & stack, Context context):
 		State(stack, context),
 		_textures(context.textures),
@@ -20,12 +26,7 @@ namespace GEX {
 		updateDisplay();
 		updatePlayerCursor();
 		_cursorCPU.setPosition(-32, -32);
-		_resultText.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
-		_resultText.setString("SELECT");
-		_resultText.setCharacterSize(100);
-		_resultText.setStyle(sf::Text::Bold);
-		_resultText.setFillColor(sf::Color::Black);
-		_resultText.setPosition(112, 224);
+		
 	}
 	void MiniGameState::draw()
 	{
@@ -76,13 +77,23 @@ namespace GEX {
 	}
 	void MiniGameState::updateDisplay()
 	{
+		const int PET_ICON_X = 192;
+		const int PET_ICON_Y = 80;
+		const double PET_SCALE = 1.75;
 		const int GAME_ICON_Y = 150;
 		const int GAME_ICON_X = 20;
 		const int GAME_ICON_PADDING = 140;
 		int column = 0;
+		_drawbleSprites.clear();
 
 		//TODO: ADD PET display TO MINIGAME
 		sf::Sprite pet;
+		pet.setTexture(_textures->get(TABLE.at(Pet::getInstance().getPetName()).iconTexture));
+		pet.scale(PET_SCALE, PET_SCALE);
+		centerOrigin(pet);
+		pet.setPosition(PET_ICON_X, PET_ICON_Y);
+		_drawbleSprites.push_back(pet);
+			
 		sf::Sprite rock;
 		rock.setTexture(_textures->get(TextureID::RockIcon));
 		rock.setPosition(GAME_ICON_X +( GAME_ICON_PADDING * column), GAME_ICON_Y);
@@ -103,6 +114,15 @@ namespace GEX {
 		_drawbleSprites.push_back(scissors);
 		_selectableIcons.push_back(scissors);
 		column++;
+
+		
+		_resultText.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
+		_resultText.setString("SELECT");
+		_resultText.setCharacterSize(100);
+		_resultText.setStyle(sf::Text::Bold);
+		_resultText.setFillColor(sf::Color::Black);
+		centerOrigin(_resultText);
+		_resultText.setPosition(192, 240);
 
 	}
 	void MiniGameState::itemNavDown()
@@ -150,6 +170,7 @@ namespace GEX {
 			_resultText.setFillColor(sf::Color::Red);
 			setResults(Results::Lose);
 		}
+		centerOrigin(_resultText);
 		updatePlayerCursor();
 	}
 	void MiniGameState::cpuSelect()

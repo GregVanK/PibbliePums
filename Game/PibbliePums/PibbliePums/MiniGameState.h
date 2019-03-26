@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "FontManager.h"
+#include "DataTables.h"
 #include <random>
 #include <time.h>
 namespace GEX {
