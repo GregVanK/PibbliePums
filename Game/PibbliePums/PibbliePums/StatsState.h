@@ -21,6 +21,7 @@ namespace GEX {
 		GEX::Animation2     _idleAnimation;
 		std::vector<sf::Sprite>	_statIcons;
 		std::vector<sf::Text>	_statTexts;
+		SoundPlayer*			_sounds;
 	};
 }
 
