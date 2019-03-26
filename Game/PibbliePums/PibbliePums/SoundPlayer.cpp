@@ -19,9 +19,12 @@ GEX::SoundPlayer::SoundPlayer()
 	loadBuffer(SoundEffectID::FroggerMove, "Media/Sound/froggerMove.wav");
 	loadBuffer(SoundEffectID::FroggerDie, "Media/Sound/froggerDie.wav");
 	loadBuffer(SoundEffectID::Jump, "Media/Sound/Jump.wav");
+	loadBuffer(SoundEffectID::CursorMove, "Media/Sound/nav.wav");
+	loadBuffer(SoundEffectID::Select, "Media/Sound/select.wav");
+	loadBuffer(SoundEffectID::Back, "Media/Sound/back.wav");
 
 	// Listener points towards the screen (default in SFML)
-	sf::Listener::setDirection(0.f, 0.f, -1.f);
+	sf::Listener::setDirection(192.f, 192.f, 0.f);
 }
 
 void GEX::SoundPlayer::play(SoundEffectID effect)

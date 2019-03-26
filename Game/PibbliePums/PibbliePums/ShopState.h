@@ -33,6 +33,7 @@ namespace GEX {
 		sf::Text			_shopKeepSpeech;
 		sf::Sprite			_cursor;
 		int					_selectedIndex;
+		SoundPlayer*		_sounds;
 		
 	};
 }

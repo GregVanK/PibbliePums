@@ -14,6 +14,8 @@ void GEX::StateStack::update(sf::Time dt)
 		if (!(*itr)->update(dt))
 			break;
 	}
+	if (_pendingList.size() > 0)
+		applyPendingChanges();
 }
 
 void GEX::StateStack::draw()

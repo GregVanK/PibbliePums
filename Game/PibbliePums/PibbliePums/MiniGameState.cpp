@@ -9,7 +9,8 @@ namespace GEX {
 		_selectedIndexPlayer(0),
 		_displayResults(false),
 		_displayResultsOver(false),
-		_resultsWait(sf::Time::Zero)
+		_resultsWait(sf::Time::Zero),
+		_sounds(context.sound)
 	{
 			
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::MinigameScreen));
@@ -41,17 +42,14 @@ namespace GEX {
 	{
 		const int WAIT_TIME = 2;
 		if (_displayResults) {
-			if (_resultsWait < sf::seconds(WAIT_TIME)) {
-				_resultsWait += dt;
-				std::cout << _resultsWait.asMilliseconds() << "\n";
-
-			}
-			else {
+			if (_resultsWait >= sf::seconds(WAIT_TIME)) {
+				_sounds->play(SoundEffectID::Back);
 				_displayResults = false;
 				requestStackPop();
-				forceUpdateState();
-				
 				return true;
+			}
+			else {
+				_resultsWait += dt;
 			}
 		}
 		return false;
@@ -61,8 +59,10 @@ namespace GEX {
 		if (!_displayResults) {
 			if (event.type != sf::Event::KeyPressed)
 				return false;
-			if (event.key.code == sf::Keyboard::Escape)
+			if (event.key.code == sf::Keyboard::Escape) {
+				_sounds->play(SoundEffectID::Back);
 				requestStackPop();
+			}
 			if (event.key.code == sf::Keyboard::Space) {
 				playerSelect();
 				_displayResults = true;
@@ -81,7 +81,8 @@ namespace GEX {
 		const int GAME_ICON_PADDING = 140;
 		int column = 0;
 
-
+		//TODO: ADD PET display TO MINIGAME
+		sf::Sprite pet;
 		sf::Sprite rock;
 		rock.setTexture(_textures->get(TextureID::RockIcon));
 		rock.setPosition(GAME_ICON_X +( GAME_ICON_PADDING * column), GAME_ICON_Y);
@@ -106,7 +107,7 @@ namespace GEX {
 	}
 	void MiniGameState::itemNavDown()
 	{
-		
+		_sounds->play(SoundEffectID::CursorMove);
 		_selectedIndexPlayer++;
 		if (_selectedIndexPlayer > _selectableIcons.size() - 1)
 			_selectedIndexPlayer = 0;
@@ -114,6 +115,7 @@ namespace GEX {
 	}
 	void MiniGameState::itemNavUp()
 	{
+		_sounds->play(SoundEffectID::CursorMove);
 		_selectedIndexPlayer--;
 		if (_selectedIndexPlayer < 0)
 			_selectedIndexPlayer = _selectableIcons.size() - 1;
@@ -128,6 +130,7 @@ namespace GEX {
 	}
 	void MiniGameState::playerSelect()
 	{
+		_sounds->play(SoundEffectID::Select);
 		cpuSelect();
 		if (_selectedIndexPlayer == _selectedIndexCPU) {
 			_resultText.setString("DRAW");

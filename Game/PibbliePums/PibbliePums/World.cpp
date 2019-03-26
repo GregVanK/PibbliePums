@@ -27,7 +27,8 @@ namespace GEX {
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldview.getSize().x, _worldview.getSize().y),
 		_spawnPosition(_worldview.getSize().x / 2.f, (_worldview.getSize().y / 4.f)*3.f),
-		_selectedIcon(0)
+		_selectedIcon(0),
+		_sounds(sounds)
 	{
 
 		_sceneTexture.create(_target.getSize().x, _target.getSize().y);
@@ -185,6 +186,11 @@ namespace GEX {
 	StateID World::getCurrentIconState()
 	{
 		return _icons[_selectedIcon]->getState();
+	}
+
+	void World::playSound(SoundEffectID s)
+	{
+		_sounds.play(s);
 	}
 
 

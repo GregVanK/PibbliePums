@@ -47,6 +47,7 @@ namespace GEX {
 		void							iconNavRight();
 		StateID							getCurrentIconState();
 		Pet&							getCurrentPet() { return *_pet; }
+		void							playSound(SoundEffectID s);
 
 		enum Layer {
 			Background = 0,
@@ -73,7 +74,7 @@ namespace GEX {
 		sf::RenderTexture				_sceneTexture;
 		sf::View						_worldview;
 		TextureManager					_textures;
-		//SoundPlayer&					_sounds;
+		SoundPlayer&					_sounds;
 
 
 
@@ -85,6 +86,7 @@ namespace GEX {
 		sf::Vector2f					_spawnPosition;
 		std::vector<Icon *>				_icons;
 		int								_selectedIcon;
+		
 
 	};
 

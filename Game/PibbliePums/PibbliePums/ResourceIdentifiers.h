@@ -58,5 +58,8 @@ namespace GEX {
 		FroggerMove,
 		FroggerDie,
 		Jump,
+		CursorMove,
+		Select,
+		Back,
 	};
 }

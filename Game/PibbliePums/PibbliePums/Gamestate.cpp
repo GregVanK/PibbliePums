@@ -40,14 +40,18 @@
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Left)
 		{
 			_world.iconNavLeft();
+			_world.playSound(GEX::SoundEffectID::CursorMove);
 		}
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Right)
 		{
 			_world.iconNavRight();
+			_world.playSound(GEX::SoundEffectID::CursorMove);
 		}
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Down || event.key.code == sf::Keyboard::Key::Up) {
+			_world.playSound(GEX::SoundEffectID::Select);
 			GEX::StateID pushableState = _world.getCurrentIconState();
 			requestStackPush(pushableState);
+			
 		}
 
 		return true;

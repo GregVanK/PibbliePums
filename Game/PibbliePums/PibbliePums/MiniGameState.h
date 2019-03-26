@@ -40,6 +40,7 @@ namespace GEX {
 		bool					_displayResultsOver;
 		sf::Time				_resultsWait;
 
+		SoundPlayer*			_sounds;
 		TextureManager*			_textures;
 		
 

@@ -10,7 +10,8 @@ namespace GEX {
 	StatsState::StatsState(GEX::StateStack & stack, Context context) :
 		State(stack, context),
 		_pet(),
-		_backgroundSprite()
+		_backgroundSprite(),
+		_sounds(context.sound)
 	{	
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::StatsScreen));
 		intializeDisplay(context.textures);
@@ -42,8 +43,10 @@ namespace GEX {
 	{
 		if (event.type != sf::Event::KeyPressed)
 			return false;
-		if (event.key.code == sf::Keyboard::Escape)
+		if (event.key.code == sf::Keyboard::Escape) {
+			_sounds->play(SoundEffectID::Back);
 			requestStackPop();
+		}
 		return false;
 	}
 	void StatsState::intializeDisplay(TextureManager* c)

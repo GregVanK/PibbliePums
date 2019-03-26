@@ -4,7 +4,8 @@ namespace GEX {
 	GEX::ShopState::ShopState(GEX::StateStack & stack, Context context) :
 		State(stack, context),
 		_backgroundSprite(),
-		_selectedIndex(0)
+		_selectedIndex(0),
+		_sounds(context.sound)
 	{
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::ShopScreen));
 
@@ -47,16 +48,23 @@ namespace GEX {
 	{
 		if (event.type != sf::Event::KeyPressed)
 			return false;
-		if (event.key.code == sf::Keyboard::Escape)
+		if (event.key.code == sf::Keyboard::Escape) {
+			_sounds->play(SoundEffectID::Back);
 			requestStackPop();
+		}
 		if (event.key.code == sf::Keyboard::Space) {
+			_sounds->play(SoundEffectID::Select);
 			itemSelect();
 			requestStackPop();
 		}
-		if (event.key.code == sf::Keyboard::Up)
+		if (event.key.code == sf::Keyboard::Up) {
+			_sounds->play(SoundEffectID::CursorMove);
 			itemNavUp();
-		if (event.key.code == sf::Keyboard::Down)
+		}
+		if (event.key.code == sf::Keyboard::Down) {
+			_sounds->play(SoundEffectID::CursorMove);
 			itemNavDown();
+		}
 		return false;
 	}
 	void ShopState::generateInventory()

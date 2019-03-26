@@ -9,7 +9,8 @@ InventoryState::InventoryState(GEX::StateStack & stack, Context context) :
 	State(stack, context),
 	_backgroundSprite(),
 	_inventory(GEX::Pet::getInstance().getInventory()),
-	_selectedIndex(0)
+	_selectedIndex(0),
+	_sounds(context.sound)
 {
 	_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::InventoryScreen));
 	_cursor.setTexture(context.textures->get(GEX::TextureID::Cursor));
@@ -46,16 +47,23 @@ bool InventoryState::handleEvents(const sf::Event & event)
 {
 	if (event.type != sf::Event::KeyPressed)
 		return false;
-	if(event.key.code == sf::Keyboard::Escape)
+	if (event.key.code == sf::Keyboard::Escape) {
+		_sounds->play(GEX::SoundEffectID::Back);
 		requestStackPop();
+	}
 	if (event.key.code == sf::Keyboard::Space) {
+		_sounds->play(GEX::SoundEffectID::Select);
 		itemSelect();
 		requestStackPop();
 	}
-	if (event.key.code == sf::Keyboard::Up)
+	if (event.key.code == sf::Keyboard::Up) {
+		_sounds->play(GEX::SoundEffectID::CursorMove);
 		itemNavUp();
-	if (event.key.code == sf::Keyboard::Down)
+	}
+	if (event.key.code == sf::Keyboard::Down) {
+		_sounds->play(GEX::SoundEffectID::CursorMove);
 		itemNavDown();
+	}
 	return false;
 }
 
