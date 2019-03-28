@@ -34,6 +34,7 @@ namespace GEX {
 		sf::Sprite			_cursor;
 		int					_selectedIndex;
 		SoundPlayer*		_sounds;
+		bool				_purchaseFailed;
 		
 	};
 }

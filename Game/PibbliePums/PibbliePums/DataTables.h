@@ -48,6 +48,7 @@ namespace GEX {
 		float									speed;
 		bool									isFlippable;
 		TextureID								iconTexture;
+		PetName									nextEvolution;
 	};
 
 	struct PickupData {

@@ -12,19 +12,19 @@ namespace GEX {
 
 GEX::Pet* GEX::Pet::_instance = nullptr;
 
-GEX::Pet::Pet():
-	_sprite(),
-	_position(Position::Center),
-	_movementTimer(sf::Time::Zero),
-	_isFlippable(false),
-	_facing(Facing::Left),
-	_state(State::Idle),
-	_agedUp(false),
-	_petType(PetName::EggBaby),
-	_textureManager(),
-	_inventory()
-{
-}
+//GEX::Pet::Pet():
+//	_sprite(),
+//	_position(Position::Center),
+//	_movementTimer(sf::Time::Zero),
+//	_isFlippable(false),
+//	_facing(Facing::Left),
+//	_state(State::Idle),
+//	_agedUp(false),
+//	_petType(PetName::EggBaby),
+//	_textureManager(),
+//	_inventory()
+//{
+//}
 
 GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = true) :
 	Entity(),
@@ -34,7 +34,7 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_isFlippable(flippable),
 	_facing(Facing::Left),
 	_state(State::Idle),
-	_agedUp(false),
+	_age(AgeGroup::Baby),
 	_petType(type),
 	_textureManager(&textures),
 	_inventory(),
@@ -42,11 +42,15 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_fullness(0),
 	_weight(10),
 	_maxStatValue(3),
-	_money(100)
+	_isSick(false),
+	_money(100),
+	EVO_TIME(120),
+	STAT_DECEASE_TIME(60)
 
 {
 	_birthday = std::chrono::system_clock::now();
-	_evoTime = _birthday + std::chrono::seconds(30);
+	_evoTime = _birthday + std::chrono::minutes(EVO_TIME);
+	_statDecreaseTime = _birthday + +std::chrono::minutes(STAT_DECEASE_TIME);
 	//intalize aniamtions
 	for (auto a : TABLE.at(type).animations)
 	{
@@ -55,15 +59,15 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	
 	centerOrigin(_sprite);
 	_sprite.scale(4, 4);
-	srand(time(NULL));
 	_animations[_state].restart();
+
+	srand(time(NULL));
 
 	_inventory.addFood(Food::FoodType::Burger);
 	_inventory.addFood(Food::FoodType::Icecream);
+	_inventory.addFood(Food::FoodType::Carrot);
 
 	_instance = this;
-	//test if instant must be updated
-	_inventory.addFood(Food::FoodType::Carrot);
 
 }
 
@@ -127,21 +131,52 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 	_sprite.setTextureRect(rec);
 	centerOrigin(_sprite);
 	//update evolution;
-	if (_agedUp == false && std::chrono::system_clock::now() > _evoTime) {
-		_petType = PetName::MelonChan;
+	if (std::chrono::system_clock::now() > _evoTime) {
+		evolvePet(dt);
+	}
+	if (std::chrono::system_clock::now() > _statDecreaseTime) {
+		if (_isSick && _happiness< 0 && _fullness < 0) {
+			//die
+		}
+		
+		if (_isSick) {
+			_happiness -= 2;
+			_fullness -= 2;
+			_weight -= 5;
+		}
+		else 
+		{
+			if (_happiness < 0 || _fullness < 0)
+				_isSick = true;
+
+			_happiness--;
+			_fullness--;
+		}
+	}
+		
+}
+
+void GEX::Pet::evolvePet(const sf::Time &dt)
+{
+	if (_age != AgeGroup::Adult && TABLE.at(_petType).nextEvolution != PetName::END) {
+		//set new type
+		_petType = TABLE.at(_petType).nextEvolution;
+		_age = TABLE.at(_petType).ageGroup;
+
+		//update textures
 		_sprite.setTexture(_textureManager->get(TABLE.at(_petType).texture));
 		for (auto a : TABLE.at(_petType).animations)
 		{
 			_animations[a.first] = a.second;
 		}
 		_animations[_state].restart();
-		_agedUp = true;
-		std::cout << "TADA!";
 		auto rec = _animations.at(_state).update(dt);
 		_sprite.setTextureRect(rec);
 		centerOrigin(_sprite);
+
+		//reset timer
+		_evoTime = std::chrono::system_clock::now() + std::chrono::minutes(EVO_TIME);
 	}
-		
 }
 
 void GEX::Pet::remove()

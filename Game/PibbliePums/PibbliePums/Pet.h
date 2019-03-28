@@ -79,8 +79,15 @@ namespace GEX {
 		bool							_isFlippable;
 		std::map<State, Animation2>		_animations;
 		State							_state;
+
+
 		std::chrono::system_clock::time_point	_birthday;
 		std::chrono::system_clock::time_point	_evoTime;
+		std::chrono::system_clock::time_point	_statDecreaseTime;
+		const int								STAT_DECEASE_TIME;
+		const int								EVO_TIME;
+
+
 		const TextureManager*					_textureManager;
 		bool							_agedUp;
 

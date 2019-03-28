@@ -5,7 +5,8 @@ namespace GEX {
 		State(stack, context),
 		_backgroundSprite(),
 		_selectedIndex(0),
-		_sounds(context.sound)
+		_sounds(context.sound),
+		_purchaseFailed(false)
 	{
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::ShopScreen));
 
@@ -13,13 +14,16 @@ namespace GEX {
 
 		std::srand(std::time(NULL));
 
-		_shopkeepQuotes.push_back("Welcome friend.");
-		_shopkeepQuotes.push_back("Bubba here to help.");
-		_shopkeepQuotes.push_back("You hungry?\nMe hungry...");
-		_shopkeepQuotes.push_back("You here to buy?");
-		_shopkeepQuotes.push_back("It's Bubba time.");
-		_shopkeepQuotes.push_back("Bubba always here\nto help.");
-		_shopkeepQuotes.push_back("You like food\nas much as Bubba?");
+		_shopkeepQuotes.push_back("welcome friend.");
+		_shopkeepQuotes.push_back("grubbooba");
+		_shopkeepQuotes.push_back("you hungry?\nme hungry...");
+		_shopkeepQuotes.push_back("you here to buy?");
+		_shopkeepQuotes.push_back("it's bubba time.");
+		_shopkeepQuotes.push_back("bubba always here\nto help.");
+		_shopkeepQuotes.push_back("you like food\nas much as bubba?");
+		_shopkeepQuotes.push_back("food is nice");
+		_shopkeepQuotes.push_back("don't eat too much");
+		_shopkeepQuotes.push_back(":)");
 
 		generateInventory();
 		updateDisplay();
@@ -53,9 +57,17 @@ namespace GEX {
 			requestStackPop();
 		}
 		if (event.key.code == sf::Keyboard::Space) {
-			_sounds->play(SoundEffectID::Select);
-			itemSelect();
-			requestStackPop();
+			if (_inventory.getFood(_selectedIndex).getPrice() <= Pet::getInstance().getMoney()) {
+				_sounds->play(SoundEffectID::Select);
+				itemSelect();
+				requestStackPop();
+			}
+			else 
+			{
+			_purchaseFailed = true;
+			updateDisplay();
+		}
+
 		}
 		if (event.key.code == sf::Keyboard::Up) {
 			_sounds->play(SoundEffectID::CursorMove);
@@ -84,15 +96,25 @@ namespace GEX {
 		const int DISPLAY_X_OFFESET = 40;
 		const int DISPLAY_Y_OFFESET = 35;
 		const int ITEM_SIZE = 35;
+		const int ITEM_PADDING_X = 150;
 
+		_drawableTexts.clear();
+		_itemTexts.clear();
 		
-		_shopKeepSpeech.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
-		int quoteIndex = rand() % _shopkeepQuotes.size();
-		_shopKeepSpeech.setString(_shopkeepQuotes[quoteIndex]);
+		_shopKeepSpeech.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));		
 		_shopKeepSpeech.setPosition(SHOP_SPEECH_TEXT_X, SHOP_SPEECH_TEXT_Y);
 		_shopKeepSpeech.setCharacterSize(SHOP_SPEECH_TEXT_SIZE);
 		_shopKeepSpeech.setStyle(sf::Text::Bold);
 		_shopKeepSpeech.setFillColor(sf::Color::Black);
+		if(!_purchaseFailed){
+			int quoteIndex = rand() % _shopkeepQuotes.size();
+			_shopKeepSpeech.setString(_shopkeepQuotes[quoteIndex]);
+		}
+		else
+		{
+			_shopKeepSpeech.setString("need more money");
+		}
+
 		_drawableTexts.push_back(_shopKeepSpeech);
 		
 		int i = 0;
@@ -106,6 +128,15 @@ namespace GEX {
 			foodDisplay.setFillColor(sf::Color::White);
 			_drawableTexts.push_back(foodDisplay);
 			_itemTexts.push_back(foodDisplay);
+
+			sf::Text priceDisplay;
+			priceDisplay.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
+			priceDisplay.setString(std::to_string(item.getPrice()));
+			priceDisplay.setCharacterSize(ITEM_SIZE);
+			priceDisplay.setPosition(DISPLAY_X_OFFESET + ITEM_PADDING_X, DISPLAY_Y_OFFESET + i * (ITEM_SIZE));
+			priceDisplay.setStyle(sf::Text::Bold);
+			priceDisplay.setFillColor(sf::Color::Yellow);
+			_drawableTexts.push_back(priceDisplay);
 			i++;
 		}
 
@@ -135,14 +166,11 @@ namespace GEX {
 		}
 	}
 	void ShopState::itemSelect() {
-		if (_inventory.getFood(_selectedIndex).getPrice() <= Pet::getInstance().getMoney()) {
+		
 			Food food = _inventory.removeFood(_selectedIndex);
 			Pet::getInstance().addMoney(-food.getPrice());
 			Pet::getInstance().getInventory().addFood(food);
-		}
-		else {
-			_shopKeepSpeech.setString("Need more money...");
-		}
+		
 		
 	}
 }
