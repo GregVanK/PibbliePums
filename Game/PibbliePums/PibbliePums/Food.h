@@ -9,7 +9,7 @@ namespace GEX {
 			Burger,
 			Icecream,
 			Carrot,
-
+			Medicine,
 			last
 		};
 		Food(FoodType type);
@@ -19,6 +19,7 @@ namespace GEX {
 		int			getWeight() { return _weight; }
 		int			getPrice() { return _price; }
 		std::string getName() { return _name; }
+		FoodType			getType() { return _type; }
 	private:
 		FoodType	_type;
 		int			_happiness;

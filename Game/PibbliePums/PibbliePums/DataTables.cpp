@@ -202,6 +202,8 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	JsonFrameParser frames = JsonFrameParser("Media/Textures/pets/eggie/baby_egg.json");
 	data[PetName::EggBaby].texture = TextureID::EggBaby;
 	data[PetName::EggBaby].iconTexture = TextureID::EggIcon;
+	data[PetName::EggBaby].nextEvolution = PetName::MelonChan;
+	data[PetName::EggBaby].ageGroup = AgeGroup::Baby;
 	data[PetName::EggBaby].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("egg_idle"));
 	data[PetName::EggBaby].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
 	data[PetName::EggBaby].animations[Pet::State::Idle].setRepeating(true);
@@ -214,11 +216,20 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::EggBaby].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
 	data[PetName::EggBaby].animations[Pet::State::Happy].setRepeating(true);
 
+	data[PetName::EggBaby].animations[Pet::State::Sick].addFrameSet(frames.getFramesFor("egg_sick"));
+	data[PetName::EggBaby].animations[Pet::State::Sick].setDuration(sf::seconds(1.5));
+	data[PetName::EggBaby].animations[Pet::State::Sick].setRepeating(true);
+
+	data[PetName::EggBaby].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("egg_upset"));
+	data[PetName::EggBaby].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
+	data[PetName::EggBaby].animations[Pet::State::Upset].setRepeating(true);
 
 
 	frames = JsonFrameParser("Media/Textures/pets/melon-chan/melon-chan.json");
 	data[PetName::MelonChan].texture = TextureID::MelonChan;
 	data[PetName::MelonChan].iconTexture = TextureID::MelonChanIcon;
+	data[PetName::MelonChan].nextEvolution = PetName::END;
+	data[PetName::EggBaby].ageGroup = AgeGroup::Teen;
 	data[PetName::MelonChan].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("melon_idle"));
 	data[PetName::MelonChan].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
 	data[PetName::MelonChan].animations[Pet::State::Idle].setRepeating(true);
@@ -230,6 +241,16 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::MelonChan].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("melon_happy"));
 	data[PetName::MelonChan].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
 	data[PetName::MelonChan].animations[Pet::State::Happy].setRepeating(true);
+
+
+	data[PetName::MelonChan].animations[Pet::State::Sick].addFrameSet(frames.getFramesFor("melon_sick"));
+	data[PetName::MelonChan].animations[Pet::State::Sick].setDuration(sf::seconds(1.5));
+	data[PetName::MelonChan].animations[Pet::State::Sick].setRepeating(true);
+
+	data[PetName::MelonChan].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("melon_upset"));
+	data[PetName::MelonChan].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
+	data[PetName::MelonChan].animations[Pet::State::Upset].setRepeating(true);
+
 	return data;
 }
 

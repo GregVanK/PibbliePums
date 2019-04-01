@@ -15,7 +15,13 @@ namespace GEX {
 
 	enum class PetName {
 		EggBaby,
-		MelonChan
+		MelonChan,
+		END
+	};
+	enum class AgeGroup {
+		Baby,
+		Teen,
+		Adult
 	};
 	class Pet : public Entity
 	{
@@ -58,9 +64,12 @@ namespace GEX {
 		
 	protected:
 		void						updateCurrent(sf::Time dt, CommandQueue& commands) override;
+		void decreaseStatsUpdate();
+		void evolvePet(const sf::Time &dt);
 	private:
 		void						remove() override;
 		void						updateMovement(sf::Time dt);
+		void checkIdleAnimationState();
 		void						updateAnimations();
 		
 	private:
@@ -70,6 +79,7 @@ namespace GEX {
 		int								_fullness;
 		int								_weight;
 		int								_money;
+		bool							_isSick;
 
 		sf::Sprite						_sprite;
 		Position						_position;
@@ -79,17 +89,17 @@ namespace GEX {
 		bool							_isFlippable;
 		std::map<State, Animation2>		_animations;
 		State							_state;
+		AgeGroup						_age;
 
 
 		std::chrono::system_clock::time_point	_birthday;
 		std::chrono::system_clock::time_point	_evoTime;
 		std::chrono::system_clock::time_point	_statDecreaseTime;
-		const int								STAT_DECEASE_TIME;
+		const int								STAT_DECREASE_TIME;
 		const int								EVO_TIME;
 
 
 		const TextureManager*					_textureManager;
-		bool							_agedUp;
 
 		Inventory						_inventory;
 

@@ -49,6 +49,7 @@ namespace GEX {
 		bool									isFlippable;
 		TextureID								iconTexture;
 		PetName									nextEvolution;
+		AgeGroup								ageGroup;
 	};
 
 	struct PickupData {

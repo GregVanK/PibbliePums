@@ -42,15 +42,15 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_fullness(0),
 	_weight(10),
 	_maxStatValue(3),
-	_isSick(false),
+	_isSick(true),
 	_money(100),
-	EVO_TIME(120),
-	STAT_DECEASE_TIME(60)
+	EVO_TIME(1),
+	STAT_DECREASE_TIME(1)
 
 {
 	_birthday = std::chrono::system_clock::now();
 	_evoTime = _birthday + std::chrono::minutes(EVO_TIME);
-	_statDecreaseTime = _birthday + +std::chrono::minutes(STAT_DECEASE_TIME);
+	_statDecreaseTime = _birthday + +std::chrono::minutes(STAT_DECREASE_TIME);
 	//intalize aniamtions
 	for (auto a : TABLE.at(type).animations)
 	{
@@ -66,6 +66,7 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	_inventory.addFood(Food::FoodType::Burger);
 	_inventory.addFood(Food::FoodType::Icecream);
 	_inventory.addFood(Food::FoodType::Carrot);
+	_inventory.addFood(Food::FoodType::Medicine);
 
 	_instance = this;
 
@@ -135,25 +136,31 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 		evolvePet(dt);
 	}
 	if (std::chrono::system_clock::now() > _statDecreaseTime) {
-		if (_isSick && _happiness< 0 && _fullness < 0) {
-			//die
-		}
-		
-		if (_isSick) {
-			_happiness -= 2;
-			_fullness -= 2;
-			_weight -= 5;
-		}
-		else 
-		{
-			if (_happiness < 0 || _fullness < 0)
-				_isSick = true;
-
-			_happiness--;
-			_fullness--;
-		}
+		decreaseStatsUpdate();
 	}
 		
+}
+
+void GEX::Pet::decreaseStatsUpdate()
+{
+	if (_isSick && _happiness< 0 && _fullness < 0) {
+		//die
+	}
+
+	if (_isSick) {
+		_happiness -= 2;
+		_fullness -= 2;
+		_weight -= 5;
+	}
+	else
+	{
+		if (_happiness <= 0 || _fullness <= 0)
+			_isSick = true;
+
+		_happiness--;
+		_fullness--;
+	}
+	_statDecreaseTime = std::chrono::system_clock::now() + std::chrono::minutes(STAT_DECREASE_TIME);
 }
 
 void GEX::Pet::evolvePet(const sf::Time &dt)
@@ -175,8 +182,9 @@ void GEX::Pet::evolvePet(const sf::Time &dt)
 		centerOrigin(_sprite);
 
 		//reset timer
-		_evoTime = std::chrono::system_clock::now() + std::chrono::minutes(EVO_TIME);
+		
 	}
+	_evoTime = std::chrono::system_clock::now() + std::chrono::minutes(EVO_TIME);
 }
 
 void GEX::Pet::remove()
@@ -200,10 +208,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 			}
 			else {
 				Entity::setVelocity(0, 0);
-				if (rand() % 2 == 0)
-					_state = State::Idle;
-				else
-					_state = State::Happy;
+				checkIdleAnimationState();
 				_position = Position::Left;
 				_movementTimer = sf::Time::Zero;
 			}
@@ -223,10 +228,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 			}
 			else {
 				Entity::setVelocity(0, 0);
-				if (rand() % 2 == 0)
-					_state = State::Idle;
-				else
-					_state = State::Happy;
+				checkIdleAnimationState();
 				_position = Position::Right;
 				_movementTimer = sf::Time::Zero;
 			}
@@ -258,10 +260,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 				Entity::setVelocity(0, 0);
 				_position = Position::Center;
 				_movementTimer = sf::Time::Zero;
-				if (rand() % 2 == 0)
-					_state = State::Idle;
-				else
-					_state = State::Happy;
+				checkIdleAnimationState();
 			}
 		}
 	}
@@ -279,14 +278,37 @@ void GEX::Pet::updateMovement(sf::Time dt)
 	_movementTimer += dt;
 }
 
-void GEX::Pet::updateAnimations()
+void GEX::Pet::checkIdleAnimationState()
 {
-	
+	if (_isSick) {
+		_state = State::Sick;
+	}
+	else {
+		if (rand() % 2 == 0)
+			_state = State::Idle;
+		else
+			_state = State::Happy;
+	}
 }
+
 
 void GEX::Pet::feed(Food f)
 {
+	//reset negative stats to lowest
+	if (_happiness < 0)
+		_happiness = 0;
+	if (_fullness < 0)
+		_fullness = 0;
+	if (_weight < 0)
+		_weight = 1;
+
+	//apply food stats
 	_happiness += f.getHappiness();
 	_fullness += f.getFullness();
 	_weight += f.getWeight();
+	if (f.getType() == Food::FoodType::Medicine) {
+		_isSick = false;
+		if(_state == State::Sick)
+		checkIdleAnimationState();
+	}
 }
