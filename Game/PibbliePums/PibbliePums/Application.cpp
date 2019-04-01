@@ -158,4 +158,6 @@ void Application::loadIcons()
 	//pet stat icons
 	_textures.load(GEX::TextureID::EggIcon, "Media/Textures/icons/pet_icons/egg_icon.png");
 	_textures.load(GEX::TextureID::MelonChanIcon, "Media/Textures/icons/pet_icons/melon-chan_icon.png");
+	_textures.load(GEX::TextureID::TouchFuzzyIcon, "Media/Textures/icons/pet_icons/touch_fuzzy_icon.png");
+
 }

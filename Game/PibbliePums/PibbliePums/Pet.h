@@ -16,6 +16,7 @@ namespace GEX {
 	enum class PetName {
 		EggBaby,
 		MelonChan,
+		TouchFuzzy,
 		END
 	};
 	enum class AgeGroup {

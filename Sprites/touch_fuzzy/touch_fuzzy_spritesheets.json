@@ -1,0 +1,98 @@
+{ "frames": {
+   "touch_fuzzy_spritesheets 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 1.aseprite": {
+    "frame": { "x": 32, "y": 0, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 2.aseprite": {
+    "frame": { "x": 64, "y": 0, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 3.aseprite": {
+    "frame": { "x": 96, "y": 0, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 4.aseprite": {
+    "frame": { "x": 0, "y": 32, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 5.aseprite": {
+    "frame": { "x": 32, "y": 32, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 6.aseprite": {
+    "frame": { "x": 64, "y": 32, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 7.aseprite": {
+    "frame": { "x": 96, "y": 32, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 8.aseprite": {
+    "frame": { "x": 0, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   },
+   "touch_fuzzy_spritesheets 9.aseprite": {
+    "frame": { "x": 32, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 500
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.9-x64",
+  "image": "C:\\Users\\PC User\\Documents\\School 2\\School 3\\Game Project\\Sprites\\touch_fuzzy\\touch_fuzzy_spritesheets.png",
+  "format": "RGBA8888",
+  "size": { "w": 128, "h": 96 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
