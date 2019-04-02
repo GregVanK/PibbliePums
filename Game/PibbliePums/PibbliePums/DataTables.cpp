@@ -278,6 +278,32 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::TouchFuzzy].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("touch_fuzzy_upset"));
 	data[PetName::TouchFuzzy].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
 	data[PetName::TouchFuzzy].animations[Pet::State::Upset].setRepeating(true);
+
+	frames = JsonFrameParser("Media/Textures/pets/slip/slip.json");
+	data[PetName::Slip].texture = TextureID::Slip;
+	data[PetName::Slip].iconTexture = TextureID::SlipIcon;
+	data[PetName::Slip].nextEvolution = PetName::END;
+	data[PetName::Slip].ageGroup = AgeGroup::Baby;
+	data[PetName::Slip].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("slip_idle"));
+	data[PetName::Slip].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
+	data[PetName::Slip].animations[Pet::State::Idle].setRepeating(true);
+
+	data[PetName::Slip].animations[Pet::State::Walking].addFrameSet(frames.getFramesFor("slip_walking"));
+	data[PetName::Slip].animations[Pet::State::Walking].setDuration(sf::seconds(1.5));
+	data[PetName::Slip].animations[Pet::State::Walking].setRepeating(true);
+
+	data[PetName::Slip].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("slip_happy"));
+	data[PetName::Slip].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
+	data[PetName::Slip].animations[Pet::State::Happy].setRepeating(true);
+
+
+	data[PetName::Slip].animations[Pet::State::Sick].addFrameSet(frames.getFramesFor("slip_sick"));
+	data[PetName::Slip].animations[Pet::State::Sick].setDuration(sf::seconds(1.5));
+	data[PetName::Slip].animations[Pet::State::Sick].setRepeating(true);
+
+	data[PetName::Slip].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("slip_upset"));
+	data[PetName::Slip].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
+	data[PetName::Slip].animations[Pet::State::Upset].setRepeating(true);
 	return data;
 }
 

@@ -17,6 +17,7 @@ namespace GEX {
 		EggBaby,
 		MelonChan,
 		TouchFuzzy,
+		Slip,
 		END
 	};
 	enum class AgeGroup {

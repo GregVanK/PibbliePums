@@ -11,6 +11,7 @@ namespace GEX {
 		EggBaby,
 		MelonChan,
 		TouchFuzzy,
+		Slip,
 		Jungle,
 		Entities,
 		LilyPad,
@@ -46,7 +47,8 @@ namespace GEX {
 
 		EggIcon,
 		MelonChanIcon,
-		TouchFuzzyIcon
+		TouchFuzzyIcon,
+		SlipIcon
 
 	};
 	enum class FontID {

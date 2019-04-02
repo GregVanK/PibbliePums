@@ -10,6 +10,8 @@
 #include <SFML\Graphics\RenderTarget.hpp>
 #include "SoundNode.h"
 #include <iostream>
+#include <time.h>
+#include <random>
 namespace GEX {
 
 	namespace
@@ -34,11 +36,22 @@ namespace GEX {
 		_sceneTexture.create(_target.getSize().x, _target.getSize().y);
 		loadTextures();
 		
-		
+		srand(time(NULL));
 
 		buildScene();
-		//create and connect player
-		std::unique_ptr<Pet> petEntity(new Pet(PetName::EggBaby, _textures, true));
+		//create and connect pet
+
+		PetName pettype;
+		switch (rand() % 3) {
+		case 0:
+			pettype = PetName::Slip;
+			break;
+		default:
+			pettype = PetName::EggBaby;
+			break;
+		}
+
+		std::unique_ptr<Pet> petEntity(new Pet(pettype, _textures, true));
 		petEntity->setPosition(_spawnPosition);
 		_pet = petEntity.get();
 		_sceneLayers[UpperField]->attachChild(std::move(petEntity));
@@ -202,6 +215,7 @@ namespace GEX {
 		_textures.load(GEX::TextureID::EggBaby, "Media/Textures/pets/eggie/baby_egg.png");
 		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
 		_textures.load(GEX::TextureID::TouchFuzzy, "Media/Textures/pets/touch-fuzzy/touch_fuzzy.png");
+		_textures.load(GEX::TextureID::Slip, "Media/Textures/pets/slip/slip.png");
 		_textures.load(GEX::TextureID::StatIcon, "Media/Textures/icons/stats.png");
 		_textures.load(GEX::TextureID::FoodInvIcon, "Media/Textures/icons/fruit.png");
 		_textures.load(GEX::TextureID::GameIcon, "Media/Textures/icons/games.png");
