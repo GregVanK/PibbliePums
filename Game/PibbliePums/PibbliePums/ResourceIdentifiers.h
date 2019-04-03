@@ -12,6 +12,10 @@ namespace GEX {
 		MelonChan,
 		TouchFuzzy,
 		Slip,
+
+		Death,
+
+
 		Jungle,
 		Entities,
 		LilyPad,

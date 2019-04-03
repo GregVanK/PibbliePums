@@ -216,6 +216,7 @@ namespace GEX {
 		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
 		_textures.load(GEX::TextureID::TouchFuzzy, "Media/Textures/pets/touch-fuzzy/touch_fuzzy.png");
 		_textures.load(GEX::TextureID::Slip, "Media/Textures/pets/slip/slip.png");
+		_textures.load(GEX::TextureID::Death, "Media/Textures/pets/death/death.png");
 		_textures.load(GEX::TextureID::StatIcon, "Media/Textures/icons/stats.png");
 		_textures.load(GEX::TextureID::FoodInvIcon, "Media/Textures/icons/fruit.png");
 		_textures.load(GEX::TextureID::GameIcon, "Media/Textures/icons/games.png");

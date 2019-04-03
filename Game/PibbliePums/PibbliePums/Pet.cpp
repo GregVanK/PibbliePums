@@ -124,7 +124,10 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 {
 
 	centerOrigin(_sprite);
-	updateMovement(dt);
+	if (_state != State::Dead)
+	{
+		updateMovement(dt);
+	}
 	Entity::updateCurrent(dt, commands);
 
 	//update animations
@@ -132,19 +135,23 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 	_sprite.setTextureRect(rec);
 	centerOrigin(_sprite);
 	//update evolution;
-	if (std::chrono::system_clock::now() > _evoTime) {
-		evolvePet(dt);
-	}
-	if (std::chrono::system_clock::now() > _statDecreaseTime) {
-		decreaseStatsUpdate();
+	if (_state != State::Dead)
+	{
+		if (std::chrono::system_clock::now() > _evoTime) {
+			evolvePet(dt);
+		}
+		if (std::chrono::system_clock::now() > _statDecreaseTime) {
+			decreaseStatsUpdate();
+		}
 	}
 		
 }
 
 void GEX::Pet::decreaseStatsUpdate()
 {
-	if (_isSick && _happiness< 0 && _fullness < 0) {
-		//die
+	if (_isSick && _happiness<= 0 && _fullness <= 0) {
+		die();
+		return;
 	}
 
 	if (_isSick) {
@@ -193,89 +200,91 @@ void GEX::Pet::remove()
 
 void GEX::Pet::updateMovement(sf::Time dt)
 {
-	if (_movementTimer >= sf::seconds(3)) {
-		if (_position == Position::Left) {
-			if (rand() % 2 == 0) {
-				Entity::setVelocity(20, 0);
-				_position = Position::Center;
-				_movementTimer = sf::Time::Zero;
-				_state = State::Walking;
-				if (_isFlippable) {
-					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
-					_facing = Facing::Right;
+	
+		if (_movementTimer >= sf::seconds(3)) {
+			if (_position == Position::Left) {
+				if (rand() % 2 == 0) {
+					Entity::setVelocity(20, 0);
+					_position = Position::Center;
+					_movementTimer = sf::Time::Zero;
+					_state = State::Walking;
+					if (_isFlippable) {
+						_sprite.setTextureRect(flip(_sprite.getTextureRect()));
+						_facing = Facing::Right;
+					}
+					return;
 				}
-				return;
+				else {
+					Entity::setVelocity(0, 0);
+					checkIdleAnimationState();
+					_position = Position::Left;
+					_movementTimer = sf::Time::Zero;
+				}
 			}
-			else {
-				Entity::setVelocity(0, 0);
-				checkIdleAnimationState();
-				_position = Position::Left;
-				_movementTimer = sf::Time::Zero;
+
+			if (_position == Position::Right) {
+				if (rand() % 2 == 0) {
+					Entity::setVelocity(-20, 0);
+					_position = Position::Center;
+					_movementTimer = sf::Time::Zero;
+					_state = State::Walking;
+					if (_isFlippable) {
+						_sprite.setTextureRect(flip(_sprite.getTextureRect()));
+						_facing = Facing::Left;
+					}
+					return;
+				}
+				else {
+					Entity::setVelocity(0, 0);
+					checkIdleAnimationState();
+					_position = Position::Right;
+					_movementTimer = sf::Time::Zero;
+				}
 			}
+			if (_position == Position::Center) {
+				int randPos = rand() % 6;
+				if (randPos == 1) {
+					Entity::setVelocity(-20, 0);
+					_position = Position::Left;
+					_state = State::Walking;
+					if (_isFlippable && _facing == Facing::Right) {
+						_sprite.setTextureRect(flip(_sprite.getTextureRect()));
+						_facing = Facing::Left;
+					}
+					_movementTimer = sf::Time::Zero;
+
+				}
+				else if (randPos == 2) {
+					Entity::setVelocity(20, 0);
+					_position = Position::Right;
+					_state = State::Walking;
+					if (_isFlippable && _facing == Facing::Left) {
+						_sprite.setTextureRect(flip(_sprite.getTextureRect()));
+						_facing = Facing::Right;
+					}
+					_movementTimer = sf::Time::Zero;
+				}
+				else {
+					Entity::setVelocity(0, 0);
+					_position = Position::Center;
+					_movementTimer = sf::Time::Zero;
+					checkIdleAnimationState();
+				}
+			}
+		}
+		/*if (_position == Position::Left) {
+			std::cout << "Left";
 		}
 
 		if (_position == Position::Right) {
-			if (rand() % 2 == 0) {
-				Entity::setVelocity(-20, 0);
-				_position = Position::Center;
-				_movementTimer = sf::Time::Zero;
-				_state = State::Walking;
-				if (_isFlippable) {
-					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
-					_facing = Facing::Left;
-				}
-				return;
-			}
-			else {
-				Entity::setVelocity(0, 0);
-				checkIdleAnimationState();
-				_position = Position::Right;
-				_movementTimer = sf::Time::Zero;
-			}
+			std::cout << "Right";
 		}
 		if (_position == Position::Center) {
-			int randPos = rand() % 6;
-			if (randPos == 1) {
-				Entity::setVelocity(-20, 0);
-				_position = Position::Left;
-				_state = State::Walking;
-				if (_isFlippable && _facing == Facing::Right) {
-					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
-					_facing = Facing::Left;
-				}
-				_movementTimer = sf::Time::Zero;
-				
-			}
-			else if (randPos == 2) {
-				Entity::setVelocity(20, 0);
-				_position = Position::Right;
-				_state = State::Walking;
-				if (_isFlippable && _facing == Facing::Left) {
-					_sprite.setTextureRect(flip(_sprite.getTextureRect()));
-					_facing = Facing::Right;
-				}
-				_movementTimer = sf::Time::Zero;
-			}
-			else {
-				Entity::setVelocity(0, 0);
-				_position = Position::Center;
-				_movementTimer = sf::Time::Zero;
-				checkIdleAnimationState();
-			}
-		}
-	}
-	/*if (_position == Position::Left) {
-		std::cout << "Left";
-	}
+			std::cout << "Center";
+		}*/
 
-	if (_position == Position::Right) {
-		std::cout << "Right";
-	}
-	if (_position == Position::Center) {
-		std::cout << "Center";
-	}*/
-
-	_movementTimer += dt;
+		_movementTimer += dt;
+	
 }
 
 void GEX::Pet::checkIdleAnimationState()
@@ -289,6 +298,26 @@ void GEX::Pet::checkIdleAnimationState()
 		else
 			_state = State::Happy;
 	}
+}
+
+void GEX::Pet::die()
+{
+	_petType = PetName::Death;
+	_state = State::Dead;
+	_sprite.setTexture(_textureManager->get(TABLE.at(_petType).texture));
+	for (auto a : TABLE.at(_petType).animations)
+	{
+		_animations[a.first] = a.second;
+	}
+	_animations[_state].restart();
+	auto rec = _animations.at(_state).update(sf::Time::Zero);
+	_sprite.setTextureRect(rec);
+	centerOrigin(_sprite);
+	//accomodate for tall sprite height centering
+	_sprite.setPosition(_sprite.getPosition().x, _sprite.getPosition().y + 32);
+	this->setVelocity(0, 0);
+
+	
 }
 
 

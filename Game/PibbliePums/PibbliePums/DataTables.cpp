@@ -304,6 +304,15 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::Slip].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("slip_upset"));
 	data[PetName::Slip].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
 	data[PetName::Slip].animations[Pet::State::Upset].setRepeating(true);
+
+	frames = JsonFrameParser("Media/Textures/pets/death/death.json");
+	data[PetName::Death].texture = TextureID::Death;
+	data[PetName::Death].nextEvolution = PetName::END;
+	data[PetName::Death].ageGroup = AgeGroup::Baby;
+	data[PetName::Death].animations[Pet::State::Dead].addFrameSet(frames.getFramesFor("death"));
+	data[PetName::Death].animations[Pet::State::Dead].setDuration(sf::seconds(2.f));
+	data[PetName::Death].animations[Pet::State::Dead].setRepeating(true);
+
 	return data;
 }
 

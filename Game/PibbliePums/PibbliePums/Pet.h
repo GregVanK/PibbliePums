@@ -18,6 +18,8 @@ namespace GEX {
 		MelonChan,
 		TouchFuzzy,
 		Slip,
+
+		Death,
 		END
 	};
 	enum class AgeGroup {
@@ -43,7 +45,8 @@ namespace GEX {
 			Walking,
 			Upset,
 			Happy,
-			Sick
+			Sick,
+			Dead
 		};
 		Pet();
 		Pet(PetName type, const TextureManager& textures, bool flippable);
@@ -57,6 +60,7 @@ namespace GEX {
 		int							getFullness();
 		int							getWeight() { return _weight; }
 		void						addMoney(int m) { _money += m; }
+		bool						isDead() { return _state == State::Dead; }
 
 		static Pet&					getInstance();
 		void						feed(Food f);
@@ -73,6 +77,7 @@ namespace GEX {
 		void						updateMovement(sf::Time dt);
 		void checkIdleAnimationState();
 		void						updateAnimations();
+		void						die();
 		
 	private:
 		int								_maxStatValue;
