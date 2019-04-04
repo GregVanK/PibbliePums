@@ -308,7 +308,7 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	frames = JsonFrameParser("Media/Textures/pets/lily/lily.json");
 	data[PetName::Lily].texture = TextureID::Lily;
 	data[PetName::Lily].iconTexture = TextureID::LilyIcon;
-	data[PetName::Lily].nextEvolution = PetName::END;
+	data[PetName::Lily].nextEvolution = PetName::DandyLion;
 	data[PetName::Lily].ageGroup = AgeGroup::Teen;
 	data[PetName::Lily].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("lily_idle"));
 	data[PetName::Lily].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
@@ -330,6 +330,28 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::Lily].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("lily_upset"));
 	data[PetName::Lily].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
 	data[PetName::Lily].animations[Pet::State::Upset].setRepeating(true);
+
+	frames = JsonFrameParser("Media/Textures/pets/dandy-lion/dandy-lion.json");
+	data[PetName::DandyLion].texture = TextureID::DandyLion;
+	data[PetName::DandyLion].iconTexture = TextureID::DandyLionIcon;
+	data[PetName::DandyLion].nextEvolution = PetName::END;
+	data[PetName::DandyLion].ageGroup = AgeGroup::Adult;
+	data[PetName::DandyLion].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("dandy-lion_idle"));
+	data[PetName::DandyLion].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
+	data[PetName::DandyLion].animations[Pet::State::Idle].setRepeating(true);
+
+	data[PetName::DandyLion].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("dandy-lion_happy"));
+	data[PetName::DandyLion].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
+	data[PetName::DandyLion].animations[Pet::State::Happy].setRepeating(true);
+
+
+	data[PetName::DandyLion].animations[Pet::State::Sick].addFrameSet(frames.getFramesFor("dandy-lion_sick"));
+	data[PetName::DandyLion].animations[Pet::State::Sick].setDuration(sf::seconds(1.5));
+	data[PetName::DandyLion].animations[Pet::State::Sick].setRepeating(true);
+
+	data[PetName::DandyLion].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("dandy-lion_upset"));
+	data[PetName::DandyLion].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
+	data[PetName::DandyLion].animations[Pet::State::Upset].setRepeating(true);
 
 	frames = JsonFrameParser("Media/Textures/pets/death/death.json");
 	data[PetName::Death].texture = TextureID::Death;

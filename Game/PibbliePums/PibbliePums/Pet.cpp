@@ -188,6 +188,12 @@ void GEX::Pet::evolvePet(const sf::Time &dt)
 		_sprite.setTextureRect(rec);
 		centerOrigin(_sprite);
 
+		if (_petType == PetName::DandyLion) {
+			Entity::setVelocity(0, 0);
+			checkIdleAnimationState();
+			_sprite.setPosition(_sprite.getPosition().x, _sprite.getPosition().y - 16);
+		}
+
 		//reset timer
 		
 	}
@@ -202,6 +208,14 @@ void GEX::Pet::updateMovement(sf::Time dt)
 {
 	
 		if (_movementTimer >= sf::seconds(3)) {
+
+			if (_petType == PetName::DandyLion) {
+				checkIdleAnimationState();
+				_movementTimer = sf::Time::Zero;
+				return;
+			}
+
+
 			if (_position == Position::Left) {
 				if (rand() % 2 == 0) {
 					Entity::setVelocity(20, 0);

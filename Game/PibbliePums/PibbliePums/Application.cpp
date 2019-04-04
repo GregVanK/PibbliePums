@@ -161,5 +161,6 @@ void Application::loadIcons()
 	_textures.load(GEX::TextureID::TouchFuzzyIcon, "Media/Textures/icons/pet_icons/touch_fuzzy_icon.png");
 	_textures.load(GEX::TextureID::SlipIcon, "Media/Textures/icons/pet_icons/slip_icon.png");
 	_textures.load(GEX::TextureID::LilyIcon, "Media/Textures/icons/pet_icons/lily_icon.png");
+	_textures.load(GEX::TextureID::DandyLionIcon, "Media/Textures/icons/pet_icons/dandy-lion_icon.png");
 
 }

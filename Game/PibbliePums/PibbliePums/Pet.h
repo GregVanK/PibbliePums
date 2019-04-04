@@ -19,7 +19,7 @@ namespace GEX {
 		TouchFuzzy,
 		Slip,
 		Lily,
-
+		DandyLion,
 		Death,
 		END
 	};
