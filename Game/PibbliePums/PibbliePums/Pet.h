@@ -18,6 +18,7 @@ namespace GEX {
 		MelonChan,
 		TouchFuzzy,
 		Slip,
+		Lily,
 
 		Death,
 		END

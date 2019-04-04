@@ -42,7 +42,7 @@ namespace GEX {
 		//create and connect pet
 
 		PetName pettype;
-		switch (rand() % 3) {
+		switch (rand() % 2) {
 		case 0:
 			pettype = PetName::Slip;
 			break;
@@ -216,6 +216,7 @@ namespace GEX {
 		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
 		_textures.load(GEX::TextureID::TouchFuzzy, "Media/Textures/pets/touch-fuzzy/touch_fuzzy.png");
 		_textures.load(GEX::TextureID::Slip, "Media/Textures/pets/slip/slip.png");
+		_textures.load(GEX::TextureID::Lily, "Media/Textures/pets/lily/lily.png");
 		_textures.load(GEX::TextureID::Death, "Media/Textures/pets/death/death.png");
 		_textures.load(GEX::TextureID::StatIcon, "Media/Textures/icons/stats.png");
 		_textures.load(GEX::TextureID::FoodInvIcon, "Media/Textures/icons/fruit.png");

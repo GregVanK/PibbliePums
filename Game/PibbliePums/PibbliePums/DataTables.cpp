@@ -282,7 +282,7 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	frames = JsonFrameParser("Media/Textures/pets/slip/slip.json");
 	data[PetName::Slip].texture = TextureID::Slip;
 	data[PetName::Slip].iconTexture = TextureID::SlipIcon;
-	data[PetName::Slip].nextEvolution = PetName::END;
+	data[PetName::Slip].nextEvolution = PetName::Lily;
 	data[PetName::Slip].ageGroup = AgeGroup::Baby;
 	data[PetName::Slip].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("slip_idle"));
 	data[PetName::Slip].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
@@ -304,6 +304,32 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::Slip].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("slip_upset"));
 	data[PetName::Slip].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
 	data[PetName::Slip].animations[Pet::State::Upset].setRepeating(true);
+
+	frames = JsonFrameParser("Media/Textures/pets/lily/lily.json");
+	data[PetName::Lily].texture = TextureID::Lily;
+	data[PetName::Lily].iconTexture = TextureID::LilyIcon;
+	data[PetName::Lily].nextEvolution = PetName::END;
+	data[PetName::Lily].ageGroup = AgeGroup::Teen;
+	data[PetName::Lily].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("lily_idle"));
+	data[PetName::Lily].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
+	data[PetName::Lily].animations[Pet::State::Idle].setRepeating(true);
+
+	data[PetName::Lily].animations[Pet::State::Walking].addFrameSet(frames.getFramesFor("lily_walking"));
+	data[PetName::Lily].animations[Pet::State::Walking].setDuration(sf::seconds(1.0));
+	data[PetName::Lily].animations[Pet::State::Walking].setRepeating(true);
+
+	data[PetName::Lily].animations[Pet::State::Happy].addFrameSet(frames.getFramesFor("lily_happy"));
+	data[PetName::Lily].animations[Pet::State::Happy].setDuration(sf::seconds(1.5));
+	data[PetName::Lily].animations[Pet::State::Happy].setRepeating(true);
+
+
+	data[PetName::Lily].animations[Pet::State::Sick].addFrameSet(frames.getFramesFor("lily_sick"));
+	data[PetName::Lily].animations[Pet::State::Sick].setDuration(sf::seconds(1.5));
+	data[PetName::Lily].animations[Pet::State::Sick].setRepeating(true);
+
+	data[PetName::Lily].animations[Pet::State::Upset].addFrameSet(frames.getFramesFor("lily_upset"));
+	data[PetName::Lily].animations[Pet::State::Upset].setDuration(sf::seconds(1.5));
+	data[PetName::Lily].animations[Pet::State::Upset].setRepeating(true);
 
 	frames = JsonFrameParser("Media/Textures/pets/death/death.json");
 	data[PetName::Death].texture = TextureID::Death;
