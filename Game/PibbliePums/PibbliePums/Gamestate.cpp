@@ -30,6 +30,7 @@
 		_world.update(dt);
 		GEX::CommandQueue& commands = _world.getCommandQueue();
 		player.handleRealTimeInput(commands);
+		
 		return true;
 	}
 	bool Gamestate::handleEvents(const sf::Event & event)

@@ -203,6 +203,7 @@ namespace GEX {
 
 	void World::playSound(SoundEffectID s)
 	{
+		_sounds.removeStoppedSounds();
 		_sounds.play(s);
 	}
 

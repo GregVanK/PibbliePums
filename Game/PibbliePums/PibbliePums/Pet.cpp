@@ -330,8 +330,6 @@ void GEX::Pet::die()
 	//accomodate for tall sprite height centering
 	_sprite.setPosition(_sprite.getPosition().x, _sprite.getPosition().y + 32);
 	this->setVelocity(0, 0);
-
-	
 }
 
 
