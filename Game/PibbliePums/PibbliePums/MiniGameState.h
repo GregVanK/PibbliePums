@@ -43,6 +43,7 @@ namespace GEX {
 
 		SoundPlayer*			_sounds;
 		TextureManager*			_textures;
+		MusicPlayer*			_music;
 		
 
 	};

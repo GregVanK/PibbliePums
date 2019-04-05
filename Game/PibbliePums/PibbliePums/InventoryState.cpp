@@ -18,6 +18,10 @@ InventoryState::InventoryState(GEX::StateStack & stack, Context context) :
 	//create text
 	generateInventoryDisplay();
 	updateCursor();
+
+	context.music->stop();
+	context.music->play(GEX::MusicID::Inventory);
+	_music = context.music;
 }
 
 void InventoryState::draw()
@@ -49,11 +53,15 @@ bool InventoryState::handleEvents(const sf::Event & event)
 		return false;
 	if (event.key.code == sf::Keyboard::Escape) {
 		_sounds->play(GEX::SoundEffectID::Back);
+		_music->stop();
+		_music->play(GEX::MusicID::Room);
 		requestStackPop();
 	}
 	if (event.key.code == sf::Keyboard::Space) {
 		_sounds->play(GEX::SoundEffectID::Select);
 		itemSelect();
+		_music->stop();
+		_music->play(GEX::MusicID::Room);
 		requestStackPop();
 	}
 	if (event.key.code == sf::Keyboard::Up) {

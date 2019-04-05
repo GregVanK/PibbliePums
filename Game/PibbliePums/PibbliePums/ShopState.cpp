@@ -28,6 +28,10 @@ namespace GEX {
 		_inventory = ShopData::getInstance()->getInventory();
 		updateDisplay();
 		updateCursor();
+
+		context.music->stop();
+		context.music->play(MusicID::Shop);
+		_music = context.music;
 	}
 
 	void ShopState::draw()
@@ -55,6 +59,8 @@ namespace GEX {
 		if (event.key.code == sf::Keyboard::Escape) {
 			_sounds->play(SoundEffectID::Back);
 			ShopData::getInstance()->setInventory(_inventory);
+			_music->stop();
+			_music->play(MusicID::Room);
 			requestStackPop();
 		}
 		if (event.key.code == sf::Keyboard::Space) {

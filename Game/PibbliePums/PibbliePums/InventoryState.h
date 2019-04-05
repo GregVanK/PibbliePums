@@ -24,5 +24,6 @@
 		int						_selectedIndex;
 		sf::Vector2f			_viewSize;
 		GEX::SoundPlayer*			_sounds;
+		GEX::MusicPlayer*			_music;
 	};
 

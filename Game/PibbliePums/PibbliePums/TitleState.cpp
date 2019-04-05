@@ -21,7 +21,7 @@ TitleState::TitleState(GEX::StateStack & stack, Context context)
 	centerOrigin(_text);
 	_text.setPosition(context.window->getView().getSize().x / 2.f, context.window->getView().getSize().y * 0.75);
 
-	context.music->play(GEX::MusicID::MenuTheme);
+	
 }
 
 void TitleState::draw()

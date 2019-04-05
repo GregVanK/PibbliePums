@@ -26,6 +26,10 @@ namespace GEX {
 		updateDisplay();
 		updatePlayerCursor();
 		_cursorCPU.setPosition(-32, -32);
+
+		context.music->stop();
+		context.music->play(MusicID::MiniGame);
+		_music = context.music;
 		
 	}
 	void MiniGameState::draw()
@@ -46,6 +50,8 @@ namespace GEX {
 			if (_resultsWait >= sf::seconds(WAIT_TIME)) {
 				_sounds->play(SoundEffectID::Back);
 				_displayResults = false;
+				_music->stop();
+				_music->play(MusicID::Room);
 				requestStackPop();
 				return true;
 			}
@@ -62,6 +68,8 @@ namespace GEX {
 				return false;
 			if (event.key.code == sf::Keyboard::Escape) {
 				_sounds->play(SoundEffectID::Back);
+				_music->stop();
+				_music->play(MusicID::Room);
 				requestStackPop();
 			}
 			if (event.key.code == sf::Keyboard::Space) {

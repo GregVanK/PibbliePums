@@ -11,7 +11,7 @@
 		_world(*context.window,*context.sound),
 		player(*context.player)
 	{
-		//context.music->play(GEX::MusicID::MissionTheme);
+		context.music->play(GEX::MusicID::Room);
 	}
 	void Gamestate::draw()
 	{
@@ -52,6 +52,7 @@
 				_world.playSound(GEX::SoundEffectID::Select);
 				GEX::StateID pushableState = _world.getCurrentIconState();
 				requestStackPush(pushableState);
+				
 
 			}
 

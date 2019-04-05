@@ -22,6 +22,7 @@ namespace GEX {
 		std::vector<sf::Sprite>	_statIcons;
 		std::vector<sf::Text>	_statTexts;
 		SoundPlayer*			_sounds;
+		MusicPlayer*			_music;
 	};
 }
 

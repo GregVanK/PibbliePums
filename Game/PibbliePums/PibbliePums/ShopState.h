@@ -45,6 +45,7 @@ namespace GEX {
 		SoundPlayer*		_sounds;
 		bool				_purchaseFailed;
 		Error				_currentError;
+		MusicPlayer*			_music;
 	};
 }
 

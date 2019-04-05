@@ -5,8 +5,12 @@ GEX::MusicPlayer::MusicPlayer()
 	_filenames(),
 	_volume(25)
 {
-	_filenames[MusicID::MenuTheme] = "Media/Music/MenuTheme.ogg";
-	_filenames[MusicID::MissionTheme] = "Media/Music/MissionTheme.ogg";
+	_filenames[MusicID::Room] = "Media/Music/room.wav";
+	_filenames[MusicID::Stats] = "Media/Music/stats.wav";
+	_filenames[MusicID::Inventory] = "Media/Music/inventory.wav";
+	_filenames[MusicID::MiniGame] = "Media/Music/minigame.wav";
+	_filenames[MusicID::Shop] = "Media/Music/shop.wav";
+	
 }
 
 void GEX::MusicPlayer::play(MusicID theme)

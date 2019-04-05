@@ -15,6 +15,9 @@ namespace GEX {
 	{	
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::StatsScreen));
 		intializeDisplay(context.textures);
+		context.music->stop();
+		context.music->play(MusicID::Stats);
+		_music = context.music;
 		
 	}
 
@@ -45,6 +48,8 @@ namespace GEX {
 			return false;
 		if (event.key.code == sf::Keyboard::Escape) {
 			_sounds->play(SoundEffectID::Back);
+			_music->stop();
+			_music->play(MusicID::Room);
 			requestStackPop();
 		}
 		return false;
