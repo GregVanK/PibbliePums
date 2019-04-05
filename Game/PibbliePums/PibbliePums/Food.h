@@ -9,8 +9,9 @@ namespace GEX {
 			Burger,
 			Icecream,
 			Carrot,
-			Medicine,
-			last
+			last,
+			Medicine
+			
 		};
 		Food(FoodType type);
 		Food();

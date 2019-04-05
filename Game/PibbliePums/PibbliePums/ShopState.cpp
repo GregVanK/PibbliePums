@@ -25,7 +25,7 @@ namespace GEX {
 		_shopkeepQuotes.push_back("don't eat too much");
 		_shopkeepQuotes.push_back(":)");
 
-		generateInventory();
+		_inventory = ShopData::getInstance()->getInventory();
 		updateDisplay();
 		updateCursor();
 	}
@@ -54,17 +54,22 @@ namespace GEX {
 			return false;
 		if (event.key.code == sf::Keyboard::Escape) {
 			_sounds->play(SoundEffectID::Back);
+			ShopData::getInstance()->setInventory(_inventory);
 			requestStackPop();
 		}
 		if (event.key.code == sf::Keyboard::Space) {
-			if (_inventory.getFood(_selectedIndex).getPrice() <= Pet::getInstance().getMoney()) {
-				_sounds->play(SoundEffectID::Select);
-				itemSelect();
-				requestStackPop();
+			//if pet has inventory space and money
+			if (testErrors()) {
+					_sounds->play(SoundEffectID::Select);
+						itemSelect();
+						repositionCursor();
+						updateDisplay();
+
 			}
 			else 
 			{
 			_purchaseFailed = true;
+
 			updateDisplay();
 		}
 
@@ -79,14 +84,22 @@ namespace GEX {
 		}
 		return false;
 	}
-	void ShopState::generateInventory()
-	{
-		for (int i = 0; i < 5; i++) {
-			Food::FoodType item = static_cast<Food::FoodType>(rand() % (int)Food::FoodType::last);
-			_inventory.addFood(item);
-		}
 
+	bool ShopState::testErrors()
+	{
+		if (_inventory.getFood(_selectedIndex).getPrice() > Pet::getInstance().getMoney())
+		{
+			_currentError = Error::noMoney;
+			return false;
+		}
+		if (Pet::getInstance().getInventory().getSize() >= 5) {
+			_currentError = Error::noSpace;
+			return false;
+		}
+		_currentError = Error::empty;
+		return true;
 	}
+
 	void ShopState::updateDisplay()
 	{
 		const int SHOP_SPEECH_TEXT_X = 150;
@@ -112,7 +125,13 @@ namespace GEX {
 		}
 		else
 		{
-			_shopKeepSpeech.setString("need more money");
+			switch (_currentError) {
+			case Error::noMoney:
+				_shopKeepSpeech.setString("need more money");
+				break;
+			case Error::noSpace:
+				_shopKeepSpeech.setString("your bag full!");
+			}
 		}
 
 		_drawableTexts.push_back(_shopKeepSpeech);
@@ -164,13 +183,21 @@ namespace GEX {
 			_cursor.setPosition(_itemTexts[_selectedIndex].getPosition().x-30,
 				_itemTexts[_selectedIndex].getPosition().y + 15);
 		}
+		else {
+			_selectedIndex = -1;
+		}
+	}
+	void ShopState::repositionCursor()
+	{
+		if (_selectedIndex + 1 > _inventory.getSize())
+			_selectedIndex--;
+		updateCursor();
 	}
 	void ShopState::itemSelect() {
-		
+		if (_selectedIndex >= 0) {
 			Food food = _inventory.removeFood(_selectedIndex);
 			Pet::getInstance().addMoney(-food.getPrice());
 			Pet::getInstance().getInventory().addFood(food);
-		
-		
+		}
 	}
 }

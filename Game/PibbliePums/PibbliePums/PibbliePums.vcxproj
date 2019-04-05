@@ -57,6 +57,7 @@
     <ClCompile Include="PlayerControl.cpp" />
     <ClCompile Include="PostEffect.cpp" />
     <ClCompile Include="SceneNode.cpp" />
+    <ClCompile Include="ShopData.cpp" />
     <ClCompile Include="ShopState.cpp" />
     <ClCompile Include="SoundNode.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="PostEffect.h" />
     <ClInclude Include="ResourceIdentifiers.h" />
     <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="ShopData.h" />
     <ClInclude Include="ShopState.h" />
     <ClInclude Include="SoundNode.h" />
     <ClInclude Include="SoundPlayer.h" />
