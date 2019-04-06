@@ -128,20 +128,64 @@ namespace GEX {
 	void StatsState::setMeterTexture(sf::Sprite &meter, int value ,GEX::TextureManager* textures)
 	{
 
-		//TODO: add switch for other agegroups
-
-		switch (value) {
-		case 0:
-			meter.setTexture(textures->get(TextureID::BabyMeter0));
+		//Nested switch for age group, and value
+		switch (Pet::getInstance().getAge()) {
+		case AgeGroup::Baby:
+			switch (value) {
+			case 0:
+				meter.setTexture(textures->get(TextureID::BabyMeter0));
+				break;
+			case 1:
+				meter.setTexture(textures->get(TextureID::BabyMeter1));
+				break;
+			case 2:
+				meter.setTexture(textures->get(TextureID::BabyMeter2));
+				break;
+			case 3:
+				meter.setTexture(textures->get(TextureID::BabyMeter3));
+				break;
+			}
 			break;
-		case 1:
-			meter.setTexture(textures->get(TextureID::BabyMeter1));
+		case AgeGroup::Teen:
+			switch (value) {
+			case 0:
+				meter.setTexture(textures->get(TextureID::TeenMeter0));
+				break;
+			case 1:
+				meter.setTexture(textures->get(TextureID::TeenMeter1));
+				break;
+			case 2:
+				meter.setTexture(textures->get(TextureID::TeenMeter2));
+				break;
+			case 3:
+				meter.setTexture(textures->get(TextureID::TeenMeter3));
+				break;
+			case 4:
+				meter.setTexture(textures->get(TextureID::TeenMeter4));
+				break;
+			}
 			break;
-		case 2:
-			meter.setTexture(textures->get(TextureID::BabyMeter2));
-			break;
-		case 3:
-			meter.setTexture(textures->get(TextureID::BabyMeter3));
+		case AgeGroup::Adult:
+			switch (value) {
+			case 0:
+				meter.setTexture(textures->get(TextureID::AdultMeter0));
+				break;
+			case 1:
+				meter.setTexture(textures->get(TextureID::AdultMeter1));
+				break;
+			case 2:
+				meter.setTexture(textures->get(TextureID::AdultMeter2));
+				break;
+			case 3:
+				meter.setTexture(textures->get(TextureID::AdultMeter3));
+				break;
+			case 4:
+				meter.setTexture(textures->get(TextureID::AdultMeter4));
+				break;
+			case 5:
+				meter.setTexture(textures->get(TextureID::AdultMeter5));
+				break;
+			}
 			break;
 		}
 	}

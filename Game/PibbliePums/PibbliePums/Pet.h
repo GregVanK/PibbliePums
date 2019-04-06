@@ -56,6 +56,7 @@ namespace GEX {
 		sf::FloatRect				getBoundingBox()const override;
 		Inventory&					getInventory() { return _inventory; }
 		PetName						getPetName() { return _petType; }
+		AgeGroup					getAge() { return _age; }
 		int							getMoney() { return _money; }
 		int							getHappiness();
 		int							getFullness();

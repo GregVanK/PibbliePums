@@ -51,6 +51,19 @@ namespace GEX {
 		BabyMeter2,
 		BabyMeter3,
 
+		TeenMeter0,
+		TeenMeter1,
+		TeenMeter2,
+		TeenMeter3,
+		TeenMeter4,
+
+		AdultMeter0,
+		AdultMeter1,
+		AdultMeter2,
+		AdultMeter3,
+		AdultMeter4,
+		AdultMeter5,
+
 		EggIcon,
 		MelonChanIcon,
 		TouchFuzzyIcon,

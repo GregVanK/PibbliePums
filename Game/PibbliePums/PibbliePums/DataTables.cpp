@@ -229,7 +229,7 @@ std::map<GEX::PetName, GEX::PetData> GEX::initalizePetData()
 	data[PetName::MelonChan].texture = TextureID::MelonChan;
 	data[PetName::MelonChan].iconTexture = TextureID::MelonChanIcon;
 	data[PetName::MelonChan].nextEvolution = PetName::END;
-	data[PetName::EggBaby].ageGroup = AgeGroup::Adult;
+	data[PetName::MelonChan].ageGroup = AgeGroup::Adult;
 	data[PetName::MelonChan].animations[Pet::State::Idle].addFrameSet(frames.getFramesFor("melon_idle"));
 	data[PetName::MelonChan].animations[Pet::State::Idle].setDuration(sf::seconds(2.f));
 	data[PetName::MelonChan].animations[Pet::State::Idle].setRepeating(true);

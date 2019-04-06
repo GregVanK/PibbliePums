@@ -154,6 +154,19 @@ void Application::loadIcons()
 	_textures.load(GEX::TextureID::BabyMeter1, "Media/Textures/icons/meter/baby_meter_1.png");
 	_textures.load(GEX::TextureID::BabyMeter2, "Media/Textures/icons/meter/baby_meter_2.png");
 	_textures.load(GEX::TextureID::BabyMeter3, "Media/Textures/icons/meter/baby_meter_3.png");
+	
+	_textures.load(GEX::TextureID::TeenMeter0, "Media/Textures/icons/meter/teen_meter_0.png");
+	_textures.load(GEX::TextureID::TeenMeter1, "Media/Textures/icons/meter/teen_meter_1.png");
+	_textures.load(GEX::TextureID::TeenMeter2, "Media/Textures/icons/meter/teen_meter_2.png");
+	_textures.load(GEX::TextureID::TeenMeter3, "Media/Textures/icons/meter/teen_meter_3.png");
+	_textures.load(GEX::TextureID::TeenMeter4, "Media/Textures/icons/meter/teen_meter_4.png");
+	
+	_textures.load(GEX::TextureID::AdultMeter0, "Media/Textures/icons/meter/adult_meter_0.png");
+	_textures.load(GEX::TextureID::AdultMeter1, "Media/Textures/icons/meter/adult_meter_1.png");
+	_textures.load(GEX::TextureID::AdultMeter2, "Media/Textures/icons/meter/adult_meter_2.png");
+	_textures.load(GEX::TextureID::AdultMeter3, "Media/Textures/icons/meter/adult_meter_3.png");
+	_textures.load(GEX::TextureID::AdultMeter4, "Media/Textures/icons/meter/adult_meter_4.png");
+	_textures.load(GEX::TextureID::AdultMeter5, "Media/Textures/icons/meter/adult_meter_5.png");
 
 	//pet stat icons
 	_textures.load(GEX::TextureID::EggIcon, "Media/Textures/icons/pet_icons/egg_icon.png");
