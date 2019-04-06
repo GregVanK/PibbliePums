@@ -176,6 +176,15 @@ void GEX::Pet::evolvePet(const sf::Time &dt)
 		//set new type
 		_petType = TABLE.at(_petType).nextEvolution;
 		_age = TABLE.at(_petType).ageGroup;
+		switch (_age) {
+		case AgeGroup::Teen:
+			_maxStatValue = 4;
+			break;
+		case AgeGroup::Adult:
+			_maxStatValue = 5;
+			break;
+
+		}
 
 		//update textures
 		_sprite.setTexture(_textureManager->get(TABLE.at(_petType).texture));
