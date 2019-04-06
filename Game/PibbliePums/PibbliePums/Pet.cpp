@@ -166,6 +166,7 @@ void GEX::Pet::decreaseStatsUpdate()
 
 		_happiness--;
 		_fullness--;
+		_weight--;
 	}
 	_statDecreaseTime = std::chrono::system_clock::now() + std::chrono::minutes(STAT_DECREASE_TIME);
 }
@@ -176,6 +177,7 @@ void GEX::Pet::evolvePet(const sf::Time &dt)
 		//set new type
 		_petType = TABLE.at(_petType).nextEvolution;
 		_age = TABLE.at(_petType).ageGroup;
+
 		switch (_age) {
 		case AgeGroup::Teen:
 			_maxStatValue = 4;
@@ -183,7 +185,6 @@ void GEX::Pet::evolvePet(const sf::Time &dt)
 		case AgeGroup::Adult:
 			_maxStatValue = 5;
 			break;
-
 		}
 
 		//update textures
