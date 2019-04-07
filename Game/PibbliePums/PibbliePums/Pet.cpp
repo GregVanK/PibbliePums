@@ -149,6 +149,10 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 
 void GEX::Pet::decreaseStatsUpdate()
 {
+	if (_happiness > _maxStatValue)
+		_happiness = _maxStatValue;
+	if (_fullness > _maxStatValue)
+		_fullness = _maxStatValue;
 	if (_isSick && _happiness<= 0 && _fullness <= 0) {
 		die();
 		return;
