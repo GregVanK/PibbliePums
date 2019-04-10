@@ -6,7 +6,7 @@
 #pragma once
 namespace GEX {
 	enum class TextureID { 
-		Landscape,
+		RoomBackground,
 		Pet,
 		EggBaby,
 		MelonChan,
@@ -17,19 +17,11 @@ namespace GEX {
 
 		Death,
 
-
-		Jungle,
-		Entities,
-		LilyPad,
-		Frog,
-		TitleScreen, 
-		GexScreen,
 		InventoryScreen,
 		ShopScreen,
 		StatsScreen,
 		MinigameScreen,
-		Explosion,Particle,
-		FinishLine,
+		
 		StatIcon,
 		FoodInvIcon,
 		GameIcon,
@@ -83,9 +75,6 @@ namespace GEX {
 		Shop
 	};
 	enum class SoundEffectID {
-		FroggerMove,
-		FroggerDie,
-		Jump,
 		CursorMove,
 		Select,
 		Back,

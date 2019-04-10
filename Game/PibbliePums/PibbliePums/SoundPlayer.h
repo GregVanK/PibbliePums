@@ -34,6 +34,7 @@ namespace GEX {
 	private:
 		std::map<SoundEffectID, std::unique_ptr<sf::SoundBuffer>>	_soundsBuffers;
 		std::list<sf::Sound>										_sounds;
+		int															_volume;
 	};
 }
 

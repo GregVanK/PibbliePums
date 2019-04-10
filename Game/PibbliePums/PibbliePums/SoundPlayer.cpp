@@ -15,10 +15,7 @@ GEX::SoundPlayer::SoundPlayer()
 	: _soundsBuffers()
 	, _sounds()
 {
-
-	loadBuffer(SoundEffectID::FroggerMove, "Media/Sound/froggerMove.wav");
-	loadBuffer(SoundEffectID::FroggerDie, "Media/Sound/froggerDie.wav");
-	loadBuffer(SoundEffectID::Jump, "Media/Sound/Jump.wav");
+	_volume = 50;
 	loadBuffer(SoundEffectID::CursorMove, "Media/Sound/nav.wav");
 	loadBuffer(SoundEffectID::Select, "Media/Sound/select.wav");
 	loadBuffer(SoundEffectID::Back, "Media/Sound/back.wav");
@@ -42,6 +39,7 @@ void GEX::SoundPlayer::play(SoundEffectID effect, sf::Vector2f position)
 	sound.setPosition(position.x, -position.y, 0.f);
 	sound.setAttenuation(Attenuation);
 	sound.setMinDistance(MinDistance3D);
+	sound.setVolume(_volume);
 	sound.play();
 }
 

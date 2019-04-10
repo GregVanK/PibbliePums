@@ -4,9 +4,9 @@
 *@description: A controller to handle collisions and events
 */
 #include "World.h"
-#include"Frog.h"
-#include "Pickup.h"
-#include "ParticleNode.h"
+
+
+
 #include <SFML\Graphics\RenderTarget.hpp>
 #include "SoundNode.h"
 #include <iostream>
@@ -14,13 +14,6 @@
 #include <random>
 namespace GEX {
 
-	namespace
-	{
-		const std::map<ObstacleType, ObstacleData> TABLE = initalizeObstacleData();
-	}
-	// car2
-	// car3
-	// truck
 
 	World::World(sf::RenderTarget& outputTarget, SoundPlayer& sounds) : _target(outputTarget),
 		_worldview(outputTarget.getDefaultView()),
@@ -59,10 +52,7 @@ namespace GEX {
 		//prep the view
 		_worldview.setCenter(_worldview.getSize().x / 2.f, _worldBounds.height - _worldview.getSize().y / 2.f);
 		initalizeIcons();
-
 	}
-
-
 	World::~World()
 	{
 	}
@@ -73,42 +63,13 @@ namespace GEX {
 		while (!_command.isEmpty()) {
 			_sceneGraph.onCommand(_command.pop(), dt);
 		}
-
 		//handle special events
 		handleCollisions();
 		_sceneGraph.removeWrecks();
 		_sceneGraph.update(dt,_command);
-		
-
 		//world events
 		destroyEntitesOutOfView();
 	}
-
-	//Manages players movement patterns created from world interaction
-	void World::adaptPlayerPosition() {
-		//if (_player->isOnPlatform())
-		//{
-		//	updatePlayerOnPlatform();
-		//	// move with platform
-		//}
-		//else
-		//{
-		//	_player->setVelocity(0.f, 0.f);
-		//}
-
-		////keep player in bounds
-		//const float BORDER_DISTANCE_HORIZONTAL = 40.f;
-		//const float BORDER_DISTANCE_BOTTOM = 20.f;
-		//const float BORDER_DISTANCE_TOP = 100.f;
-		//sf::FloatRect viewBounds(_worldview.getCenter() - _worldview.getSize() / 2.f, _worldview.getSize()); //ASK
-		//sf::Vector2f position = _player->getPosition();
-		//position.x = std::max(position.x, viewBounds.left + BORDER_DISTANCE_HORIZONTAL);
-		//position.x = std::min(position.x, viewBounds.left + viewBounds.width - BORDER_DISTANCE_HORIZONTAL);
-		//position.y = std::max(position.y, viewBounds.top + BORDER_DISTANCE_TOP);
-		//position.y = std::min(position.y, viewBounds.top + viewBounds.height - BORDER_DISTANCE_BOTTOM);
-		//_player->setPosition(position);
-	}
-	
 	//render the game
 	void World::draw()
 	{
@@ -120,9 +81,6 @@ namespace GEX {
 	{
 		return _command;
 	}
-
-	
-
 	//gets display area
 	sf::FloatRect World::getViewBounds() const
 	{
@@ -140,10 +98,8 @@ namespace GEX {
 		return bounds;
 	}
 
-	//check if player is currently active
 	bool World::hasAlivePlayer() const
 	{
-		//return _player->getLives() > 0 || _player->isDead();
 		return true;
 	}
 
@@ -152,21 +108,10 @@ namespace GEX {
 	{
 		return false;
 	}
+
 	//removes obstacles that leave the view
 	void World::destroyEntitesOutOfView()
 	{
-		//Command command;
-		//command.category = Category::Type::KillObstacle;
-		//command.action = derivedAction<Entity>([this](Entity& e, sf::Time dt) 
-		//{
-		//	int i = 1;
-		//	if (!getSpawnerBounds().intersects(e.getBoundingBox())) {
-		//		e.remove();
-		//	}
-		//});
-		//_command.push(command);
-		//command.category = Category::Type::PlatformObstacle;
-		//_command.push(command);
 	}
 
 	void World::iconNavLeft()
@@ -192,10 +137,8 @@ namespace GEX {
 		{
 			_selectedIcon++;
 		}
-		_icons[_selectedIcon]->toggleActive();
-		
+		_icons[_selectedIcon]->toggleActive();	
 	}
-
 	StateID World::getCurrentIconState()
 	{
 		return _icons[_selectedIcon]->getState();
@@ -206,13 +149,10 @@ namespace GEX {
 		_sounds.removeStoppedSounds();
 		_sounds.play(s);
 	}
-
-
-
 	//loads textures
 	void World::loadTextures()
 	{
-		_textures.load(GEX::TextureID::Landscape, "Media/Textures/room.png");
+		_textures.load(GEX::TextureID::RoomBackground, "Media/Textures/room.png");
 		_textures.load(GEX::TextureID::EggBaby, "Media/Textures/pets/eggie/baby_egg.png");
 		_textures.load(GEX::TextureID::MelonChan, "Media/Textures/pets/melon-chan/melon-chan.png");
 		_textures.load(GEX::TextureID::TouchFuzzy, "Media/Textures/pets/touch-fuzzy/touch_fuzzy.png");
@@ -224,18 +164,11 @@ namespace GEX {
 		_textures.load(GEX::TextureID::FoodInvIcon, "Media/Textures/icons/fruit.png");
 		_textures.load(GEX::TextureID::GameIcon, "Media/Textures/icons/games.png");
 		_textures.load(GEX::TextureID::ShopIcon, "Media/Textures/icons/dollar_sign.png");
-
-		
-
-
-		
 	}
 
 	//inital construction of the world
 	void World::buildScene()
 	{
-
-		
 		//initalizes layers
 		for (int i = 0; i < LayerCount; ++i) {
 			auto category = (i == UpperField) ? Category::Type::AirSceneLayer : Category::Type::None;
@@ -244,11 +177,8 @@ namespace GEX {
 			_sceneGraph.attachChild(std::move(layer));
 		}
 
-
-
-		
 		//sets background
-		sf::Texture& texture = _textures.get(TextureID::Landscape);
+		sf::Texture& texture = _textures.get(TextureID::RoomBackground);
 		sf::IntRect textureRect(_worldBounds);
 		texture.setRepeated(false);
 		std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
@@ -256,16 +186,8 @@ namespace GEX {
 		backgroundSprite->scale(2, 2);
 		_sceneLayers[Background]->attachChild(std::move(backgroundSprite));
 
-		//add player aircraft & game objects
-		//std::unique_ptr<Frog> playerEntity(new Frog(_textures));
-		//playerEntity->setPosition(_spawnPosition);
-		//_player = playerEntity.get();
-		//_sceneLayers[UpperField]->attachChild(std::move(playerEntity));
-		
-
-		//Obstacles
-		//addObstacles();
 	}
+
 	//checks collision categories pairs
 	bool matchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2)
 	{
@@ -285,49 +207,6 @@ namespace GEX {
 	//handles collisions between player and obstacles
 	void World::handleCollisions()
 	{
-		////build list of colliding pairs of scenenodes
-		//std::set<SceneNode::Pair> collisionPairs;
-		//_sceneGraph.checkSceneCollision(_sceneGraph, collisionPairs);
-		//_player->setIsOnPlatform(false);
-		//for (SceneNode::Pair pair : collisionPairs) {
-		//	if (matchesCategories(pair, Category::Type::Frog, Category::Type::KillObstacle)) {
-		//		if(_player->getLives() > 0)
-		//			_player->die();
-		//	}
-		//	if (matchesCategories(pair, Category::Type::Frog, Category::Type::Finish)) {
-		//		auto& finish = static_cast<Obstacle&>(*(pair.second));
-		//		if (!finish.hasFinishFrog() && !finish.hasCroc()) {
-		//			finish.setHasFinishFrog(true);
-		//			addScore(500);
-		//			if (_lilypadCounter < 5)
-		//				_lilypadCounter++;
-		//			// checks if all lily pads have been filled
-		//			if (_lilypadCounter == 5)
-		//			{
-		//				// increases level by resetting all lily pads and increasing level counter
-		//				increaseLevel();
-		//			}
-		//			resetPlayer();
-		//		}
-		//		else {
-		//			if (_player->getLives() > 0)
-		//				_player->die();
-		//		}
-		//	}
-		//	if (matchesCategories(pair, Category::Type::Frog, Category::Type::PlatformObstacle))
-		//	{
-		//		auto& platform = static_cast<Obstacle&>(*(pair.second));
-		//		if(platform.isActive())
-		//			_player->setIsOnPlatform(true);
-		//		else
-		//			_player->setIsOnPlatform(false);
-		//	}
-		//	if (matchesCategories(pair, Category::Type::Frog, Category::Type::BonusObstacle)) {
-		//		auto& bonus = static_cast<Obstacle&>(*(pair.second));
-		//		addScore(1000);
-		//		bonus.destroy();
-		//	}
-		//}
 	}
 
 	void World::initalizeIcons()
@@ -350,9 +229,6 @@ namespace GEX {
 			//gets a relative position based on amount of icons loaded
 			float xPos = (((i) * (getViewBounds().width / (_icons.size()))) + ICON_PADDING);
 			_icons[i]->setPosition(sf::Vector2f(xPos, TOP_ROW));
-
 		}
 	}
-
-
 }

@@ -23,8 +23,6 @@ Application::Application()
 	_window.setKeyRepeatEnabled(false);
 	GEX::FontManager::getInstance().load(GEX::FontID::Main,"Media/apple_kid.ttf");
 
-	_textures.load(GEX::TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
-	_textures.load(GEX::TextureID::GexScreen, "Media/Textures/face.png");
 	_textures.load(GEX::TextureID::InventoryScreen, "Media/Textures/inventory.png");
 	_textures.load(GEX::TextureID::StatsScreen, "Media/Textures/stats_background.png");
 	_textures.load(GEX::TextureID::Cursor, "Media/Textures/Cursor.png");
@@ -39,13 +37,6 @@ Application::Application()
 
 	loadIcons();
 	
-	
-	///StatDisplay
-
-	/*_statText.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
-	_statText.setPosition(5.0f, 5.0f);
-	_statText.setCharacterSize(20);
-	_statText.setString("FPS:\nUpdateTime:\nX:Y:R:");*/
 
 	registerStates();
 	_stateStack.pushState(GEX::StateID::Game);
@@ -55,30 +46,6 @@ Application::Application()
 	
 }
 
-//void Application::run()
-//{
-//	
-//	sf::Clock clock;
-//	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-//
-//	while (_window.isOpen())
-//	{
-//		processInput();
-//		timeSinceLastUpdate = clock.restart();
-//		if (timeSinceLastUpdate > TimePerFrame)
-//		{	
-//			update(TimePerFrame);
-//		}
-//		else {
-//			update(TimePerFrame);
-//		}
-//		
-//		timeSinceLastUpdate -= TimePerFrame;
-//		render();
-//	}
-//}
-
-//Old run
 
 void Application::run()
 {
@@ -129,12 +96,7 @@ void Application::render()
 
 void Application::registerStates()
 {
-	_stateStack.registerState<TitleState>(GEX::StateID::Title);
-	_stateStack.registerState<MenuState>(GEX::StateID::Menu);
 	_stateStack.registerState<Gamestate>(GEX::StateID::Game);
-	_stateStack.registerState<PauseState>(GEX::StateID::Pause);
-	_stateStack.registerState<GexState>(GEX::StateID::Gex);
-	_stateStack.registerState<GameOverState>(GEX::StateID::GameOver);
 	_stateStack.registerState<InventoryState>(GEX::StateID::Inventory);
 	_stateStack.registerState<GEX::StatsState>(GEX::StateID::Stats);
 	_stateStack.registerState<GEX::ShopState>(GEX::StateID::Shop);

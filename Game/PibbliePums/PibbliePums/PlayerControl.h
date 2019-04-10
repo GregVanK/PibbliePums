@@ -19,9 +19,7 @@ namespace GEX {
 		Select
 	};
 	enum class MissionStatus {
-		MissionRunning,
-		MissionSuccess,
-		MissionFailure
+		Running
 	};
 	class PlayerControl
 	{

@@ -1,9 +1,8 @@
 #include "Inventory.h"
 
 namespace GEX {
-	Inventory::Inventory()
-	{
-	}
+
+	Inventory::Inventory() {};
 	Inventory::Inventory(std::list<Food> inventory)
 	{
 	}

@@ -110,13 +110,8 @@ int GEX::Pet::getFullness()
 		return _fullness;
 }
 
-
-
 GEX::Pet & GEX::Pet::getInstance()
 {
-	//if (!_instance) {
-	//	Pet::_instance = new Pet();
-	//}
 	return *Pet::_instance;
 }
 
@@ -143,8 +138,7 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 		if (std::chrono::system_clock::now() > _statDecreaseTime) {
 			decreaseStatsUpdate();
 		}
-	}
-		
+	}	
 }
 
 void GEX::Pet::decreaseStatsUpdate()
@@ -300,17 +294,6 @@ void GEX::Pet::updateMovement(sf::Time dt)
 				}
 			}
 		}
-		/*if (_position == Position::Left) {
-			std::cout << "Left";
-		}
-
-		if (_position == Position::Right) {
-			std::cout << "Right";
-		}
-		if (_position == Position::Center) {
-			std::cout << "Center";
-		}*/
-
 		_movementTimer += dt;
 	
 }

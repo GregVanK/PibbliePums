@@ -13,16 +13,11 @@
 #include "Pet.h"
 #include "CommandQueue.h"
 #include <vector>
-#include "PostEffect.h"
-#include "BloomEffect.h"
 #include "SoundPlayer.h"
-#include "Obstacle.h"
 #include "FontManager.h"
 #include <stdlib.h>
 #include <time.h>
 #include "Icon.h"
-
-
 
 namespace sf {
 	class RenderTarget;
@@ -34,7 +29,6 @@ namespace GEX {
 		World(sf::RenderTarget& outputTarget,SoundPlayer& sounds);
 		~World();
 		void							update(sf::Time dt);
-		void adaptPlayerPosition();
 		void							draw();
 		CommandQueue&					getCommandQueue();
 
@@ -54,15 +48,6 @@ namespace GEX {
 			LowerField,
 			UpperField,
 			LayerCount
-		};
-		struct SpawnPoint {
-			SpawnPoint(ObstacleType type, float x, float y)
-			:type(type),
-			x(x),
-			y(y){}
-			ObstacleType type;
-			float x;
-			float y;
 		};
 	private:
 		void							loadTextures();
@@ -86,7 +71,6 @@ namespace GEX {
 		sf::Vector2f					_spawnPosition;
 		std::vector<Icon *>				_icons;
 		int								_selectedIcon;
-		
 
 	};
 

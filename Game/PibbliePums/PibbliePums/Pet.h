@@ -31,7 +31,7 @@ namespace GEX {
 	class Pet : public Entity
 	{
 	public:
-		
+			
 		enum class Position {
 			Left,
 			Right,
@@ -49,7 +49,7 @@ namespace GEX {
 			Sick,
 			Dead
 		};
-		Pet();
+
 		Pet(PetName type, const TextureManager& textures, bool flippable);
 		virtual void				drawcurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 		unsigned int				getCategory() const override;
@@ -63,10 +63,8 @@ namespace GEX {
 		int							getWeight() { return _weight; }
 		void						addMoney(int m) { _money += m; }
 		bool						isDead() { return _state == State::Dead; }
-
 		static Pet&					getInstance();
 		void						feed(Food f);
-
 		Pet(Pet const&) = delete;
 		void operator=(Pet const&) = delete;
 		
@@ -77,13 +75,11 @@ namespace GEX {
 	private:
 		void						remove() override;
 		void						updateMovement(sf::Time dt);
-		void checkIdleAnimationState();
-		void						updateAnimations();
+		void						checkIdleAnimationState();
 		void						die();
 		
 	private:
 		int								_maxStatValue;
-
 		int								_happiness;
 		int								_fullness;
 		int								_weight;
@@ -99,19 +95,13 @@ namespace GEX {
 		std::map<State, Animation2>		_animations;
 		State							_state;
 		AgeGroup						_age;
-
-
 		std::chrono::system_clock::time_point	_birthday;
 		std::chrono::system_clock::time_point	_evoTime;
 		std::chrono::system_clock::time_point	_statDecreaseTime;
 		const int								STAT_DECREASE_TIME;
 		const int								EVO_TIME;
-
-
 		const TextureManager*					_textureManager;
-
 		Inventory						_inventory;
-
 		static Pet*						_instance;
 	};
 }

@@ -19,18 +19,9 @@
 	}
 	bool Gamestate::update(sf::Time dt)
 	{
-		if (!_world.hasAlivePlayer()) {
-			player.setMissionStatus(GEX::MissionStatus::MissionFailure);
-			requestStackPush(GEX::StateID::GameOver);
-		}
-		else if (_world.hasPlayerReachedEnd()) {
-			player.setMissionStatus(GEX::MissionStatus::MissionSuccess);
-			requestStackPush(GEX::StateID::GameOver);
-		}
 		_world.update(dt);
 		GEX::CommandQueue& commands = _world.getCommandQueue();
 		player.handleRealTimeInput(commands);
-		
 		return true;
 	}
 	bool Gamestate::handleEvents(const sf::Event & event)
@@ -52,11 +43,7 @@
 				_world.playSound(GEX::SoundEffectID::Select);
 				GEX::StateID pushableState = _world.getCurrentIconState();
 				requestStackPush(pushableState);
-				
-
 			}
-
 		}
-
 		return true;
 	}
