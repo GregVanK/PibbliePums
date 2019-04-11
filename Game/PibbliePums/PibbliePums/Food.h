@@ -1,5 +1,10 @@
 #pragma once
 #include <string>
+/*
+*@author: Greg VanKampen
+*@file: Food
+*@description: Edible items for the pet
+*/
 namespace GEX {
 	class Food
 	{

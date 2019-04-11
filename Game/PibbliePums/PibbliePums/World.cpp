@@ -1,7 +1,7 @@
 /*
-*@author: Greg VanKampen & Vaughn Rowse
+*@author: Greg VanKampen
 *@file: World.cpp
-*@description: A controller to handle collisions and events
+*@description: A controller which displays the pet animations in the main room
 */
 #include "World.h"
 
@@ -30,10 +30,9 @@ namespace GEX {
 		loadTextures();
 		
 		srand(time(NULL));
-
 		buildScene();
-		//create and connect pet
-
+		
+		//set starting pet
 		PetName pettype;
 		switch (rand() % 2) {
 		case 0:
@@ -44,6 +43,7 @@ namespace GEX {
 			break;
 		}
 
+		//build pet entity
 		std::unique_ptr<Pet> petEntity(new Pet(pettype, _textures, true));
 		petEntity->setPosition(_spawnPosition);
 		_pet = petEntity.get();
@@ -97,7 +97,7 @@ namespace GEX {
 		bounds.height += 200.f;
 		return bounds;
 	}
-
+	//unused
 	bool World::hasAlivePlayer() const
 	{
 		return true;
@@ -109,11 +109,12 @@ namespace GEX {
 		return false;
 	}
 
-	//removes obstacles that leave the view
+	//unused
 	void World::destroyEntitesOutOfView()
 	{
 	}
 
+	//changes current selected icon
 	void World::iconNavLeft()
 	{
 		_icons[_selectedIcon]->toggleActive();
@@ -126,7 +127,7 @@ namespace GEX {
 		}
 		_icons[_selectedIcon]->toggleActive();
 	}
-
+	//changes current selected icon
 	void World::iconNavRight()
 	{
 		_icons[_selectedIcon]->toggleActive();
@@ -139,11 +140,13 @@ namespace GEX {
 		}
 		_icons[_selectedIcon]->toggleActive();	
 	}
+	//gets state belonging to selected icon
 	StateID World::getCurrentIconState()
 	{
 		return _icons[_selectedIcon]->getState();
 	}
 
+	//cleans sounds and plays a new sound
 	void World::playSound(SoundEffectID s)
 	{
 		_sounds.removeStoppedSounds();
@@ -188,7 +191,7 @@ namespace GEX {
 
 	}
 
-	//checks collision categories pairs
+	//Unused
 	bool matchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2)
 	{
 		unsigned int category1 = colliders.first->getCategory();
@@ -204,11 +207,12 @@ namespace GEX {
 		return false;
 	}
 
-	//handles collisions between player and obstacles
+	//Unused
 	void World::handleCollisions()
 	{
 	}
 
+	//loads icons
 	void World::initalizeIcons()
 	{
 		const float TOP_ROW = 40;

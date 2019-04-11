@@ -1,7 +1,11 @@
 #include "MiniGameState.h"
 #include "Utility.h"
 #include <iostream>
-
+/*
+*@author: Greg VanKampen
+*@file: MiniGameState
+*@description: State used to control minigames
+*/
 namespace GEX {
 	namespace
 	{
@@ -18,7 +22,8 @@ namespace GEX {
 		_resultsWait(sf::Time::Zero),
 		_sounds(context.sound)
 	{
-			
+	
+		//generate display
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::MinigameScreen));
 		_cursorPlayer.setTexture(context.textures->get(GEX::TextureID::Cursor));
 		_cursorCPU.setTexture(context.textures->get(GEX::TextureID::CPUCursor));
@@ -26,12 +31,13 @@ namespace GEX {
 		updateDisplay();
 		updatePlayerCursor();
 		_cursorCPU.setPosition(-32, -32);
-
+		//play music
 		context.music->stop();
 		context.music->play(MusicID::MiniGame);
 		_music = context.music;
 		
 	}
+	//update display
 	void MiniGameState::draw()
 	{
 		sf::RenderWindow& window = *getContext().window;
@@ -43,8 +49,10 @@ namespace GEX {
 		window.draw(_cursorCPU);
 		window.draw(_resultText);
 	}
+	
 	bool MiniGameState::update(sf::Time dt)
 	{
+		//display the results briefly before closing
 		const int WAIT_TIME = 2;
 		if (_displayResults) {
 			if (_resultsWait >= sf::seconds(WAIT_TIME)) {
@@ -61,6 +69,7 @@ namespace GEX {
 		}
 		return false;
 	}
+	//handle game inputs
 	bool MiniGameState::handleEvents(const sf::Event & event)
 	{
 		if (!_displayResults) {
@@ -83,6 +92,7 @@ namespace GEX {
 		}
 		return false;
 	}
+	//apply UI positions
 	void MiniGameState::updateDisplay()
 	{
 		const int PET_ICON_X = 192;
@@ -133,6 +143,7 @@ namespace GEX {
 		_resultText.setPosition(192, 240);
 
 	}
+	//cursor navigation
 	void MiniGameState::itemNavDown()
 	{
 		_sounds->play(SoundEffectID::CursorMove);
@@ -141,6 +152,7 @@ namespace GEX {
 			_selectedIndexPlayer = 0;
 		updatePlayerCursor();
 	}
+	//cursor navigation
 	void MiniGameState::itemNavUp()
 	{
 		_sounds->play(SoundEffectID::CursorMove);
@@ -149,6 +161,7 @@ namespace GEX {
 			_selectedIndexPlayer = _selectableIcons.size() - 1;
 		updatePlayerCursor();
 	}
+	//Update cursor position
 	void MiniGameState::updatePlayerCursor()
 	{
 		const int PLAYER_Y_OFFSET = 74;
@@ -156,6 +169,7 @@ namespace GEX {
 		sf::Vector2f pos = _selectableIcons[_selectedIndexPlayer].getPosition();
 		_cursorPlayer.setPosition(pos.x + PLAYER_X_OFFSET, pos.y + PLAYER_Y_OFFSET);
 	}
+	//Select a game icon and calculate results
 	void MiniGameState::playerSelect()
 	{
 		_sounds->play(SoundEffectID::Select);
@@ -181,6 +195,7 @@ namespace GEX {
 		centerOrigin(_resultText);
 		updatePlayerCursor();
 	}
+	//generates a CPU game selection
 	void MiniGameState::cpuSelect()
 	{
 		const int CPU_Y_OFFSET = -32;
@@ -191,6 +206,7 @@ namespace GEX {
 		_cursorCPU.setPosition(pos.x + CPU_X_OFFSET, pos.y + CPU_Y_OFFSET);
 
 	}
+	//calculate rewards based on game results
 	void MiniGameState::setResults(Results r)
 	{
 		_gameResult = r;

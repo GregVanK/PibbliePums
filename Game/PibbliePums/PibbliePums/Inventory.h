@@ -1,6 +1,11 @@
 #pragma once
 #include <list>
 #include "Food.h"
+/*
+*@author: Greg VanKampen
+*@file: Inventory
+*@description: Special food container class
+*/
 namespace GEX {
 	class Inventory
 	{

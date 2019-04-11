@@ -3,6 +3,11 @@
 #include "Utility.h"
 #include "DataTables.h"
 #include <map>
+/*
+*@author: Greg VanKampen
+*@file: Pet
+*@description: A pet class that grows up and gets hungry
+*/
 using namespace std::placeholders;
 namespace GEX {
 	namespace {
@@ -11,20 +16,6 @@ namespace GEX {
 }
 
 GEX::Pet* GEX::Pet::_instance = nullptr;
-
-//GEX::Pet::Pet():
-//	_sprite(),
-//	_position(Position::Center),
-//	_movementTimer(sf::Time::Zero),
-//	_isFlippable(false),
-//	_facing(Facing::Left),
-//	_state(State::Idle),
-//	_agedUp(false),
-//	_petType(PetName::EggBaby),
-//	_textureManager(),
-//	_inventory()
-//{
-//}
 
 GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = true) :
 	Entity(),
@@ -48,6 +39,7 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 	STAT_DECREASE_TIME(1)
 
 {
+	//sets timers
 	_birthday = std::chrono::system_clock::now();
 	_evoTime = _birthday + std::chrono::minutes(EVO_TIME);
 	_statDecreaseTime = _birthday + +std::chrono::minutes(STAT_DECREASE_TIME);
@@ -63,6 +55,7 @@ GEX::Pet::Pet(PetName type, const TextureManager & textures, bool flippable = tr
 
 	srand(time(NULL));
 
+	//give a starting inventory
 	_inventory.addFood(Food::FoodType::Burger);
 	_inventory.addFood(Food::FoodType::Icecream);
 	_inventory.addFood(Food::FoodType::Carrot);
@@ -88,7 +81,7 @@ sf::FloatRect GEX::Pet::getBoundingBox() const
 {
 	return sf::FloatRect();
 }
-
+//get Happiness
 int GEX::Pet::getHappiness()
 {
 	if (_happiness > _maxStatValue)
@@ -99,7 +92,7 @@ int GEX::Pet::getHappiness()
 		return _happiness;
 
 }
-
+// get fullness
 int GEX::Pet::getFullness()
 {
 	if (_fullness > _maxStatValue)
@@ -110,11 +103,13 @@ int GEX::Pet::getFullness()
 		return _fullness;
 }
 
+//get instance 
 GEX::Pet & GEX::Pet::getInstance()
 {
 	return *Pet::_instance;
 }
 
+//update pet
 void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 {
 
@@ -132,6 +127,7 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 	//update evolution;
 	if (_state != State::Dead)
 	{
+		//tests pets event timers
 		if (std::chrono::system_clock::now() > _evoTime) {
 			evolvePet(dt);
 		}
@@ -140,7 +136,7 @@ void GEX::Pet::updateCurrent(sf::Time dt, CommandQueue & commands)
 		}
 	}	
 }
-
+//decreases pets stats based on current
 void GEX::Pet::decreaseStatsUpdate()
 {
 	if (_happiness > _maxStatValue)
@@ -156,6 +152,7 @@ void GEX::Pet::decreaseStatsUpdate()
 		_happiness -= 2;
 		_fullness -= 2;
 		_weight -= 5;
+		return;
 	}
 	else
 	{
@@ -166,9 +163,11 @@ void GEX::Pet::decreaseStatsUpdate()
 		_fullness--;
 		_weight--;
 	}
+	//set next decrease time
 	_statDecreaseTime = std::chrono::system_clock::now() + std::chrono::minutes(STAT_DECREASE_TIME);
 }
 
+//change pet into next form
 void GEX::Pet::evolvePet(const sf::Time &dt)
 {
 	if (_age != AgeGroup::Adult && TABLE.at(_petType).nextEvolution != PetName::END) {
@@ -196,6 +195,7 @@ void GEX::Pet::evolvePet(const sf::Time &dt)
 		_sprite.setTextureRect(rec);
 		centerOrigin(_sprite);
 
+		//imobalize pet if dandylion
 		if (_petType == PetName::DandyLion) {
 			Entity::setVelocity(0, 0);
 			checkIdleAnimationState();
@@ -212,6 +212,7 @@ void GEX::Pet::remove()
 {
 }
 
+//Animation triggers which update velocity, current position, and animation state randomly
 void GEX::Pet::updateMovement(sf::Time dt)
 {
 	
@@ -298,6 +299,7 @@ void GEX::Pet::updateMovement(sf::Time dt)
 	
 }
 
+//changes state to and idle animation
 void GEX::Pet::checkIdleAnimationState()
 {
 	if (_isSick) {
@@ -311,6 +313,7 @@ void GEX::Pet::checkIdleAnimationState()
 	}
 }
 
+//changes state to dead
 void GEX::Pet::die()
 {
 	_petType = PetName::Death;

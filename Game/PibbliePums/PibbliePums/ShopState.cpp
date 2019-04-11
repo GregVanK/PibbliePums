@@ -1,5 +1,9 @@
 #include "ShopState.h"
-
+/*
+*@author: Greg VanKampen
+*@file: ShopeState
+*@description: State that displays the shop inventory and sells items
+*/
 namespace GEX {
 	GEX::ShopState::ShopState(GEX::StateStack & stack, Context context) :
 		State(stack, context),
@@ -13,7 +17,7 @@ namespace GEX {
 		_cursor.setTexture(context.textures->get(GEX::TextureID::Cursor));
 
 		std::srand(std::time(NULL));
-
+		//load shop keeper quotes
 		_shopkeepQuotes.push_back("welcome friend.");
 		_shopkeepQuotes.push_back("grubbooba");
 		_shopkeepQuotes.push_back("you hungry?\nme hungry...");
@@ -24,7 +28,7 @@ namespace GEX {
 		_shopkeepQuotes.push_back("food is nice");
 		_shopkeepQuotes.push_back("don't eat too much");
 		_shopkeepQuotes.push_back(":)");
-
+		//load shop data
 		_inventory = ShopData::getInstance()->getInventory();
 		updateDisplay();
 		updateCursor();
@@ -51,7 +55,7 @@ namespace GEX {
 
 		return false;
 	}
-
+	//handle key inputs
 	bool GEX::ShopState::handleEvents(const sf::Event & event)
 	{
 		if (event.type != sf::Event::KeyPressed)
@@ -70,7 +74,6 @@ namespace GEX {
 						itemSelect();
 						repositionCursor();
 						updateDisplay();
-
 			}
 			else 
 			{
@@ -78,7 +81,6 @@ namespace GEX {
 
 			updateDisplay();
 		}
-
 		}
 		if (event.key.code == sf::Keyboard::Up) {
 			_sounds->play(SoundEffectID::CursorMove);
@@ -91,6 +93,7 @@ namespace GEX {
 		return false;
 	}
 
+	//tests if an item cannot be bought
 	bool ShopState::testErrors()
 	{
 		if (_inventory.getFood(_selectedIndex).getPrice() > Pet::getInstance().getMoney())
@@ -106,6 +109,7 @@ namespace GEX {
 		return true;
 	}
 
+	//generate UI positions
 	void ShopState::updateDisplay()
 	{
 		const int SHOP_SPEECH_TEXT_X = 150;

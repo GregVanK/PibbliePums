@@ -1,6 +1,11 @@
 #pragma once
 #include "Inventory.h"
 #include <chrono>
+/*
+*@author: Greg VanKampen
+*@file: ShopData
+*@description: Singleton dataholder which contains the shop inventory
+*/
 namespace GEX {
 	class ShopData
 	{

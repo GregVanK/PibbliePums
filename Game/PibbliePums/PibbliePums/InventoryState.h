@@ -2,6 +2,11 @@
 #include"State.h"
 #include "Pet.h"
 #include "Inventory.h"
+/*
+*@author: Greg VanKampen
+*@file: InventoryState
+*@description: State used to display the player's inventory
+*/
 	class InventoryState : public GEX::State
 	{
 	public:

@@ -4,6 +4,11 @@
 #include "DataTables.h"
 #include <random>
 #include <time.h>
+/*
+*@author: Greg VanKampen
+*@file: MiniGameState
+*@description: State used to control minigames
+*/
 namespace GEX {
 	class MiniGameState : public GEX::State
 	{

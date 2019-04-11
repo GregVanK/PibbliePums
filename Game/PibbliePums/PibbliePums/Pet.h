@@ -10,6 +10,11 @@
 #include <ctime> 
 #include "Inventory.h"
 #include "Food.h"
+/*
+*@author: Greg VanKampen
+*@file: Pet
+*@description: A pet class that grows up and gets hungry
+*/
 namespace GEX {
 	
 

@@ -1,7 +1,9 @@
 #include "Food.h"
-
-
-
+/*
+*@author: Greg VanKampen
+*@file: Food
+*@description: Edible items for the pet
+*/
 GEX::Food::Food(FoodType type):
 	_type(type)
 {

@@ -1,5 +1,5 @@
 /*
-*@author: Greg VanKampen  & Vaughn Rowse
+*@author: Greg VanKampen  
 *@file: PlayerControl.h
 *@description: A class to handle player inputs
 */

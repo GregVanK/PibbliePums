@@ -7,7 +7,11 @@
 #include <vector>
 #include <string>
 #include <random>
-
+/*
+*@author: Greg VanKampen
+*@file: ShopeState
+*@description: State that displays the shop inventory and sells items
+*/
 namespace GEX {
 	
 	class ShopState : public State

@@ -3,8 +3,11 @@
 #include "FontManager.h"
 #include <algorithm>
 #include <string> 
-
-
+/*
+*@author: Greg VanKampen
+*@file: InventoryState
+*@description: State used to display the player's inventory
+*/
 InventoryState::InventoryState(GEX::StateStack & stack, Context context) :
 	State(stack, context),
 	_backgroundSprite(),
@@ -12,6 +15,7 @@ InventoryState::InventoryState(GEX::StateStack & stack, Context context) :
 	_selectedIndex(0),
 	_sounds(context.sound)
 {
+	//intialize Display
 	_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::InventoryScreen));
 	_cursor.setTexture(context.textures->get(GEX::TextureID::Cursor));
 	centerOrigin(_cursor);
@@ -47,6 +51,7 @@ bool InventoryState::update(sf::Time dt)
 	return false;
 }
 
+//handle key presses
 bool InventoryState::handleEvents(const sf::Event & event)
 {
 	if (event.type != sf::Event::KeyPressed)
@@ -74,7 +79,7 @@ bool InventoryState::handleEvents(const sf::Event & event)
 	}
 	return false;
 }
-
+//set up inventory UI
 void InventoryState::generateInventoryDisplay()
 {
 	const int DISPLAY_X_OFFESET = 40;
@@ -119,7 +124,7 @@ void InventoryState::generateInventoryDisplay()
 	}
 
 }
-
+//change currently selected item
 void InventoryState::itemNavDown()
 {
 	_selectedIndex++;
@@ -127,7 +132,7 @@ void InventoryState::itemNavDown()
 		_selectedIndex = 0;
 	updateCursor();
 }
-
+//change currently selected item
 void InventoryState::itemNavUp()
 {
 	_selectedIndex--;
@@ -135,14 +140,14 @@ void InventoryState::itemNavUp()
 		_selectedIndex = _itemTexts.size() -1;
 	updateCursor();
 }
-
+//use currently selected item
 void InventoryState::itemSelect()
 {
 	if(_inventory.getSize() !=0)
 	GEX::Pet::getInstance().feed(GEX::Pet::getInstance().getInventory().removeFood(_selectedIndex));
 }
 
-//place the cursor
+//position cursor
 void InventoryState::updateCursor()
 {
 	if (_inventory.getSize() != 0) {

@@ -1,6 +1,9 @@
 #include "StatsState.h"
-
-
+/*
+*@author: Greg VanKampen
+*@file: StatsState
+*@description: State that displays pet's current stats
+*/
 namespace GEX {
 	namespace
 	{
@@ -13,6 +16,7 @@ namespace GEX {
 		_backgroundSprite(),
 		_sounds(context.sound)
 	{	
+		//initalize display
 		_backgroundSprite.setTexture(context.textures->get(GEX::TextureID::StatsScreen));
 		intializeDisplay(context.textures);
 		context.music->stop();
@@ -21,6 +25,7 @@ namespace GEX {
 		
 	}
 
+	//draw update
 	void StatsState::draw()
 	{
 		sf::RenderWindow& window = *getContext().window;
@@ -42,6 +47,7 @@ namespace GEX {
 		return false;
 	}
 
+	//handle key inputs
 	bool StatsState::handleEvents(const sf::Event & event)
 	{
 		if (event.type != sf::Event::KeyPressed)
@@ -54,6 +60,7 @@ namespace GEX {
 		}
 		return false;
 	}
+	//set up UI placements
 	void StatsState::intializeDisplay(TextureManager* c)
 	{
 		const int PET_ICON_YOFFSET = 90;
@@ -101,6 +108,7 @@ namespace GEX {
 		fullnessMeter.setPosition(METER_XOFFSET, fullnessIcon.getPosition().y + METER_YCORRECTION);
 		_statIcons.push_back(fullnessMeter);
 
+		//lower UI
 		sf::Text weightText;
 		weightText.setFont(GEX::FontManager::getInstance().getFont(GEX::FontID::Main));
 		weightText.setCharacterSize(60);

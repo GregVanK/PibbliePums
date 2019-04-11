@@ -4,6 +4,11 @@
 #include "Pet.h"
 #include "Animation2.h"
 #include "FontManager.h"
+/*
+*@author: Greg VanKampen
+*@file: StatsState
+*@description: State that displays pet's current stats
+*/
 namespace GEX {
 	class StatsState : public GEX::State
 	{
